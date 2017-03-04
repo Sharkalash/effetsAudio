@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <portaudio.h>
 #include <math.h>
-#define SAMPLE_RATE 44100
-#define FRAME_PER_BUFFER 1024
-#define PA_SAMPLE_TYPE paFloat32
+#include "prototypes.h"
 
 int choix;
 
