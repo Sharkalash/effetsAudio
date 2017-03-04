@@ -40,4 +40,4 @@ audio.o: prototypes.h audio.h
 main.o: /usr/include/stdio.h /usr/include/features.h
 main.o: /usr/include/stdc-predef.h /usr/include/libio.h
 main.o: /usr/include/_G_config.h /usr/include/wchar.h /usr/include/stdlib.h
-main.o: /usr/include/alloca.h /usr/include/math.h prototypes.h audio.h
+main.o: /usr/include/alloca.h /usr/include/math.h prototypes.h
