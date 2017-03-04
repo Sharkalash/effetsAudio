@@ -1,10 +1,9 @@
 CC = gcc
 DEBUG = yes
-EXE = salut
+EXE = audioFX
 SRC = $(wildcard *.c)#Génération de la liste des fichiers sources
-INC = $(wildcard *.h)#Génération de la liste des fichiers includes
 OBJ = $(SRC:.c=.o)#Génération de la liste des fichiers objets
-LIBS = #Pour les bibliothèques
+LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread #Bibliothèques
 
 ifeq ($(DEBUG), yes) #Condtions
 $(info "Mode debug")
@@ -17,15 +16,19 @@ endif
 
 all: $(EXE)
 $(EXE) : $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(LIBS)
 
 
-%.o:%.c #Tous les fichiers .o: Tous les fichiers .c correspondant cependant pas de dépendances
+%.o:%.c git
 	$(CC) -c $< $(CFLAGS)
 clean :
+	rm -f *~* #Fichier temporaire d'emacs
+	rm -f *#*
+cleanO :
 	rm -f *.o
-	rm *~* #Fichier temporaire d'emacs
 depend:
 	makedepend $(SRC)
 doc:
 	doxygen
+push :
+	git push https://github.com/Sharkalash/effetsAudio
