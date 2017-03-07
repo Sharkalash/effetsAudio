@@ -3,8 +3,10 @@
 #include <portaudio.h>
 #include <math.h>
 #include "prototypes.h"
+#include "audio.h"
 
-int choix;
+
+static FX effets[NB_EFFETS];
 
 
 static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
@@ -14,35 +16,29 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   userData = (void *)userData;
   timeInfo = (void *)timeInfo;
   statusFlags = statusFlags;
-  
+  //framesPerBuffer *=1;
   float *out = (float*)outputBuffer; //Buffer de sortie
   float *in = (float*)inputBuffer; //Buffer d'entrée
-  unsigned int i;
-  //const unsigned int a=35, b=4,M=20/SAMPLE_RATE;
+  //unsigned int i;
+  float gain = 11,mix = 1;
+  float *copy = (float *)malloc(sizeof(float)*2*framesPerBuffer);
+  copie(in,out);
   
-  for(i=0;i<2*framesPerBuffer;i++)
-    {
-      switch (choix) {
-	/*case 1: {
-	*out++ = (in[i]/fabs(in[i]))*(1-exp(a*powf(in[i],2)/fabs(in[i])));
-	break;
-	}*/
-      default:
-	*out++=*in++;
-	break;
-      }
-      
+  if(effets[0]==FUZZ){
+    copie(out,copy);
+    fuzz(copy,out,gain,mix);
     }
-  
+ 
+  free(copy);
   return 0;
-  }
+}
 
 int main()
 {
   PaStream *stream;
   PaError err;
 
-
+  effets[0] = OFF;
   
   err=Pa_Initialize();
 
@@ -63,16 +59,16 @@ int main()
   }
 
   if((err=Pa_StartStream(stream))!=paNoError) goto error;
-  char c;
+  char c = 0;
   do{
-    
-    fflush(stdout);
-    c = getchar();
-    printf("%c\n", choix);
-    if(c=='f'){
-      choix=1;
-    }
-      
+    c = getc(stdin);
+    while(getc(stdin)!='\n');//On vide le buffer
+ 
+    if(c=='f')
+      effets[0]=FUZZ;
+    else
+      effets[0] = OFF;
+   
   }while(c!='q');
   
   err = Pa_StopStream(stream);
