@@ -9,6 +9,27 @@
 static FX effets[NB_EFFETS];
 
 
+void creerBuffer(){
+  listBuffer = malloc(sizeof(Buffer));
+
+  listBuffer->premier = 0;
+  listBuffer->dernier = 0;
+}
+
+void push(float *in){
+  listBuffer->dernier = (listBuffer->dernier+1)%TMAX;
+  
+  if(listBuffer->premier == listBuffer->dernier){
+    listBuffer->premier = (listBuffer->premier+1)%TMAX;
+  }
+
+  copie(in,listBuffer->buffer[listBuffer->dernier]);
+}
+
+void libererBuffer(){
+  free(listBuffer);
+}
+
 static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
 			  const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
@@ -33,7 +54,8 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     copie(out,copy);
     overdrive(copy,out);
   }
- 
+
+  push(in);
   free(copy);
   return 0;
 }
@@ -43,6 +65,7 @@ int main()
   PaStream *stream;
   PaError err;
   int i;
+  creerBuffer();
 
   for(i=0;i<NB_EFFETS;i++)
     effets[i] = OFF;
@@ -93,10 +116,12 @@ int main()
   if (err != paNoError) {
     printf("PortAudio error : %s\n", Pa_GetErrorText(err));
   }
-  
+
+  libererBuffer();
   return 0;
 
  error:
+  libererBuffer();
   Pa_Terminate();
   fprintf(stderr, "ERROR ERROR ERROR\n");
   fprintf( stderr, "Error number: %d\n", err );
