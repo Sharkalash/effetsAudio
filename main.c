@@ -28,6 +28,11 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     copie(out,copy);
     fuzz(copy,out,gain,mix);
     }
+
+  if(effets[1]==OVERDRIVE){
+    copie(out,copy);
+    overdrive(copy,out);
+  }
  
   free(copy);
   return 0;
@@ -37,8 +42,11 @@ int main()
 {
   PaStream *stream;
   PaError err;
+  int i;
 
-  effets[0] = OFF;
+  for(i=0;i<NB_EFFETS;i++)
+    effets[i] = OFF;
+  
   
   err=Pa_Initialize();
 
@@ -65,7 +73,9 @@ int main()
     while(getc(stdin)!='\n');//On vide le buffer
  
     if(c=='f')
-      effets[0]=FUZZ;
+      effets[0]=effets[0]==OFF?FUZZ:OFF;
+    else if(c=='o')
+      effets[1]=effets[1]==OFF?OVERDRIVE:OFF;
     else
       effets[0] = OFF;
    

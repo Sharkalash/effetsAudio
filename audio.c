@@ -10,7 +10,7 @@ float maxTabAbs(float *tab)
   float max=fabs(tab[0]);
   unsigned int i;
 
-  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+  for(i=1;i<2*FRAME_PER_BUFFER;i++)
     {
       if(max>fabs(tab[i]))
 	max = fabs(tab[i]);
@@ -57,5 +57,29 @@ void fuzz(float* in,float *out, float gain, float mix)
 
   free(q);
   free(z);
+
+}
+
+void overdrive(float *in, float *out)
+{
+  float th = 1/3;
+  unsigned int i;  
+  
+  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+    {
+      if (fabs(in[i]) < th)
+	{
+	  out[i] = 2 * in[i];
+	}
+      else if (fabs(in[i]) >= th && fabs(in[i]) < 2 * th)
+	{
+	  out[i] = SIGN(in[i])*(3 - powf((2 - 3 * fabs(in[i])), 2)) / 3;
+	}
+      else
+	{
+	  out[i] = SIGN(in[i]);
+	}
+
+    }
 
 }

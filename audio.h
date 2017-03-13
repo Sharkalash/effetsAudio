@@ -31,6 +31,7 @@ void copie(float *src, float* dest);
  */
 void fuzz(float* in,float *out, float gain, float mix);
 
+void overdrive(float *in, float *out);
 
 #endif 
 
