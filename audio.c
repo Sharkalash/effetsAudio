@@ -83,3 +83,63 @@ void overdrive(float *in, float *out)
     }
 
 }
+
+float wah = 500;
+int monte = 1;
+
+void wahwah(float *in, float *out,int fw)
+{
+  float *outH = malloc(sizeof(float)*2*FRAME_PER_BUFFER),*outL = malloc(sizeof(float)*2*FRAME_PER_BUFFER), *fc = malloc(sizeof(float)*2*FRAME_PER_BUFFER); //Highpass et Lowpass
+  int i=0;
+  float damp = 0.05,f1,q1;
+  int maxf=3000, minf = 500;
+
+  float delta = fw/(float)(SAMPLE_RATE);
+ 
+  while(i<2*FRAME_PER_BUFFER)
+    {
+      
+      while(i<2*FRAME_PER_BUFFER && wah<=maxf && monte){
+	//printf("%f\n", wah);
+	fc[i++] = wah;
+	wah+=delta;
+      }
+
+      if(wah>maxf)
+	monte = !monte;
+      
+      while(i<2*FRAME_PER_BUFFER && wah>=minf && !monte){
+	fc[i++] = wah;
+	wah-=delta;
+      }
+
+      if(wah<minf)
+	monte = !monte;
+      
+    }
+
+  f1 = 2*sin((PI*fc[0])/SAMPLE_RATE);
+
+  q1 = 2*damp;
+
+  outH[0] = in[0];
+  out[0] = f1*outH[0];
+  outL[0] = f1*out[0];
+
+  for(i=1;i<2*FRAME_PER_BUFFER;i++)
+    {
+      outH[i] = in[i] - outL[i-1] - q1*out[i-1];
+      out[i] = f1*outH[i] + out[i-1];
+      outL[i] = f1*out[i] + outL[i-1];
+      f1 = 2*sin((PI*fc[i])/SAMPLE_RATE);
+    }
+
+  /*float max = maxTabAbs(out);
+
+  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+    {
+      out[i]/=max;
+      }*/
+
+}
+

@@ -1,7 +1,7 @@
 #ifndef DEF_AUDIO
 #define DEF_AUDIO
 
-
+#define PI 3.14159265359
 #define SIGN(X) ((X<0)?-1:1)
 
 /**
@@ -32,6 +32,8 @@ void copie(float *src, float* dest);
 void fuzz(float* in,float *out, float gain, float mix);
 
 void overdrive(float *in, float *out);
+
+void wahwah(float *in, float *out,int fw);
 
 #endif 
 

@@ -9,6 +9,7 @@
 static FX effets[NB_EFFETS];
 
 
+
 void creerBuffer(){
   listBuffer = malloc(sizeof(Buffer));
 
@@ -43,7 +44,13 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   //unsigned int i;
   float gain = 11,mix = 1;
   float *copy = (float *)malloc(sizeof(float)*2*framesPerBuffer);
+
   copie(in,out);
+
+  if(effets[2]==WAH){
+    copie(out,copy);
+    wahwah(copy,out,2000);
+  }
   
   if(effets[0]==FUZZ){
     copie(out,copy);
@@ -55,6 +62,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     overdrive(copy,out);
   }
 
+  
   push(in);
   free(copy);
   return 0;
@@ -66,7 +74,6 @@ int main()
   PaError err;
   int i;
   creerBuffer();
-
   for(i=0;i<NB_EFFETS;i++)
     effets[i] = OFF;
   
@@ -94,13 +101,18 @@ int main()
   do{
     c = getc(stdin);
     while(getc(stdin)!='\n');//On vide le buffer
- 
-    if(c=='f')
+
+    switch(c){
+    case 'f':
       effets[0]=effets[0]==OFF?FUZZ:OFF;
-    else if(c=='o')
+      break;
+    case 'o':
       effets[1]=effets[1]==OFF?OVERDRIVE:OFF;
-    else
-      effets[0] = OFF;
+      break;
+    case 'w':
+      effets[2]=effets[2]==OFF?WAH:OFF;
+      break;
+    }
    
   }while(c!='q');
   
