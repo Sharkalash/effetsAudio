@@ -35,5 +35,7 @@ void overdrive(float *in, float *out);
 
 void wahwah(float *in, float *out,int fw);
 
+void tremolo(float *in, float *out, float alpha, float fc);
+
 #endif 
 
