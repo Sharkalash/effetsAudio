@@ -35,8 +35,9 @@ push :
 # DO NOT DELETE
 
 audio.o: /usr/include/stdlib.h /usr/include/features.h
-audio.o: /usr/include/stdc-predef.h /usr/include/alloca.h /usr/include/math.h
-audio.o: prototypes.h audio.h
+audio.o: /usr/include/stdc-predef.h /usr/include/alloca.h
+audio.o: /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h
+audio.o: /usr/include/wchar.h /usr/include/math.h prototypes.h audio.h
 main.o: /usr/include/stdio.h /usr/include/features.h
 main.o: /usr/include/stdc-predef.h /usr/include/libio.h
 main.o: /usr/include/_G_config.h /usr/include/wchar.h /usr/include/stdlib.h
