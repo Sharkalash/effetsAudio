@@ -154,3 +154,25 @@ void wahwah(float *in, float *out,int fw)
 
 }
 
+int trem = 0;
+//const int tremMax = 8192;
+
+void tremolo(float *in, float *out, float alpha, float fc)
+{
+  int i;
+
+  
+
+  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+    out[i] = in[i] * (1 + (alpha*sin(2*PI*(trem++)*(fc/(float)(SAMPLE_RATE)))));
+
+
+  trem%=8192;
+    /*for(i=0;i<10;i++)
+    printf("%f\n",out[i]);
+
+  */
+
+  
+
+}

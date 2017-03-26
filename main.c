@@ -49,7 +49,12 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(effets[2]==WAH){
     copie(out,copy);
-    wahwah(copy,out,2000);
+    wahwah(copy,out,3000);
+  }
+
+  if(effets[3]==TREMOLO){
+    copie(out,copy);
+    tremolo(copy,out,0.5,5);
   }
   
   if(effets[0]==FUZZ){
@@ -111,6 +116,9 @@ int main()
       break;
     case 'w':
       effets[2]=effets[2]==OFF?WAH:OFF;
+      break;
+    case 't':
+      effets[3]=effets[3]==OFF?TREMOLO:OFF;
       break;
     }
    
