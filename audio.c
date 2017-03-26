@@ -60,11 +60,6 @@ void fuzz(float* in,float *out, float gain, float mix)
 
 }
 
-
-
-
-
-
 void overdrive(float *in, float *out)
 {
   float th = 1./3.;
@@ -88,12 +83,6 @@ void overdrive(float *in, float *out)
     }
 
 }
-
-
-
-
-
-
 
 float wah = 500;
 int monte = 1;
@@ -168,11 +157,34 @@ void tremolo(float *in, float *out, float alpha, float fc)
 
 
   trem%=8192;
-    /*for(i=0;i<10;i++)
-    printf("%f\n",out[i]);
-
-  */
-
-  
-
 }
+
+
+void echo(float *in, float *out, float gain, float retard){
+  const int delayLine = (int)retard*SAMPLE_RATE/1000;
+  int i;
+  //int indEcho =delayLine/TMAX;
+  //float gain1 = 0,gain2 = 1;
+
+  if(delayLine>TMAX*2*FRAME_PER_BUFFER)
+    exit(0);
+
+    
+  for(i=0;i<2*FRAME_PER_BUFFER;i++){
+    int r=i-delayLine;
+    if(r>=0){
+      out[i] =  in[i] + gain*in[r];
+    }
+    else{
+      r=-r;
+      int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
+      if(numBuffer<0)
+	numBuffer += TMAX-1;
+      //int lr = (i%2)==0 && r%(2*FRAME_PER_BUFFER)
+      int ind = r%(2*FRAME_PER_BUFFER);
+      out[i] =in[i]+ gain*listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - ind -1];
+      
+    }
+  }
+}
+

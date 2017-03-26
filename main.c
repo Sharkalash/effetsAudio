@@ -4,10 +4,9 @@
 #include <math.h>
 #include "prototypes.h"
 #include "audio.h"
-
+ 
 
 static FX effets[NB_EFFETS];
-
 
 
 void creerBuffer(){
@@ -47,6 +46,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   copie(in,out);
 
+
   if(effets[2]==WAH){
     copie(out,copy);
     wahwah(copy,out,3000);
@@ -60,13 +60,17 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   if(effets[0]==FUZZ){
     copie(out,copy);
     fuzz(copy,out,gain,mix);
-    }
+  }
 
   if(effets[1]==OVERDRIVE){
     copie(out,copy);
     overdrive(copy,out);
   }
-
+  
+  if(effets[4]==ECHO){
+    copie(out,copy);
+    echo(copy,out,0.5,600);
+  }
   
   push(in);
   free(copy);
@@ -77,12 +81,14 @@ int main()
 {
   PaStream *stream;
   PaError err;
+
   int i;
   creerBuffer();
   for(i=0;i<NB_EFFETS;i++)
     effets[i] = OFF;
   
   
+  creerBuffer();
   err=Pa_Initialize();
 
   if(err!=paNoError ) goto error;
@@ -107,6 +113,7 @@ int main()
     c = getc(stdin);
     while(getc(stdin)!='\n');//On vide le buffer
 
+
     switch(c){
     case 'f':
       effets[0]=effets[0]==OFF?FUZZ:OFF;
@@ -119,6 +126,9 @@ int main()
       break;
     case 't':
       effets[3]=effets[3]==OFF?TREMOLO:OFF;
+      break;
+    case 'e':
+      effets[4]=effets[4]==OFF?ECHO:OFF;
       break;
     }
    

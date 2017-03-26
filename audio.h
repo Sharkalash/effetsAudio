@@ -31,11 +31,15 @@ void copie(float *src, float* dest);
  */
 void fuzz(float* in,float *out, float gain, float mix);
 
+
 void overdrive(float *in, float *out);
 
 void wahwah(float *in, float *out,int fw);
 
 void tremolo(float *in, float *out, float alpha, float fc);
+
+void echo(float *in, float *out, float gain, float retard);
+
 
 #endif 
 
