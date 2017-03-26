@@ -60,9 +60,14 @@ void fuzz(float* in,float *out, float gain, float mix)
 
 }
 
+
+
+
+
+
 void overdrive(float *in, float *out)
 {
-  float th = 1/3;
+  float th = 1./3.;
   unsigned int i;  
   
   for(i=0;i<2*FRAME_PER_BUFFER;i++)
@@ -73,7 +78,7 @@ void overdrive(float *in, float *out)
 	}
       else if (fabs(in[i]) >= th && fabs(in[i]) < 2 * th)
 	{
-	  out[i] = SIGN(in[i])*(3 - powf((2 - 3 * fabs(in[i])), 2)) / 3;
+	  out[i] = SIGN(in[i])*(3 - powf((2 - 3 * fabs(in[i])), 2)) / 3.;
 	}
       else
 	{
@@ -83,6 +88,12 @@ void overdrive(float *in, float *out)
     }
 
 }
+
+
+
+
+
+
 
 float wah = 500;
 int monte = 1;
