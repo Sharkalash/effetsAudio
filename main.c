@@ -45,11 +45,10 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   float gain = 11,mix = 1;
   float *copy = (float *)malloc(sizeof(float)*2*framesPerBuffer);
   copie(in,out);
-  
-  
+
   if(effets[1]==ECHO){
     copie(out,copy);
-    echo(copy,out,0.7,75);
+    echo(copy,out,0.5,600);
     }
   
   if(effets[0]==FUZZ){
@@ -58,7 +57,14 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     }
 
   push(in);
- 
+  /*FILE *f = NULL;
+
+  f = fopen("in.txt","a");
+  int i;
+  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+    fprintf(f,"%f\n",in[i]);
+    fclose(f);*/
+  
   free(copy);
   return 0;
 }

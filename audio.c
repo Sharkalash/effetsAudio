@@ -65,25 +65,26 @@ void echo(float *in, float *out, float gain, float retard){
   const int delayLine = (int)retard*SAMPLE_RATE/1000;
   int i;
   //int indEcho =delayLine/TMAX;
-  float gain1 = 0,gain2 = 1;
-  printf("%d\n", delayLine);
+  //float gain1 = 0,gain2 = 1;
+
   if(delayLine>TMAX*2*FRAME_PER_BUFFER)
     exit(0);
 
-  /*for(i=0;i<indEcho;i++)
-    out[i] = in[i];*/
     
   for(i=0;i<2*FRAME_PER_BUFFER;i++){
     int r=i-delayLine;
     if(r>=0){
-      out[i] =  gain1*in[i] + gain2*in[r];
+      out[i] =  in[i] + gain*in[r];
     }
     else{
       r=-r;
-      int numBuffer = listBuffer->premier - (int)(r/(2*FRAME_PER_BUFFER));
+      int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
       if(numBuffer<0)
-	numBuffer += TMAX;
-      out[i] =gain1*in[i]+ gain2*listBuffer->buffer[numBuffer][r%(2*FRAME_PER_BUFFER)];
+	numBuffer += TMAX-1;
+      //int lr = (i%2)==0 && r%(2*FRAME_PER_BUFFER)
+      int ind = r%(2*FRAME_PER_BUFFER);
+      out[i] =in[i]+ gain*listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - ind -1];
+      
     }
   }
 }

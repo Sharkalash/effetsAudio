@@ -5,7 +5,7 @@
 #define FRAME_PER_BUFFER 256
 #define PA_SAMPLE_TYPE paFloat32
 #define NB_EFFETS 2
-#define TMAX 8
+#define TMAX 200
 #define TAILLE_BUFFER TMAX*2*FRAME_PER_BUFFER
 
 //Structure pour mémoriser les buffers d'entrée
