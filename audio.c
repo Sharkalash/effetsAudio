@@ -84,10 +84,10 @@ void overdrive(float *in, float *out)
 
 }
 
-float wah = 500;
-int monte = 1;
+/*float wah = 500;
+  int monte = 1;*/
 
-void wahwah(float *in, float *out,int fw)
+void wahwah(float *in, float *out,int fw, float *wah, int * monte)
 {
   float *outH = malloc(sizeof(float)*2*FRAME_PER_BUFFER),*outL = malloc(sizeof(float)*2*FRAME_PER_BUFFER), *fc = malloc(sizeof(float)*2*FRAME_PER_BUFFER); //Highpass et Lowpass
   int i=0;
@@ -99,22 +99,22 @@ void wahwah(float *in, float *out,int fw)
   while(i<2*FRAME_PER_BUFFER)
     {
       
-      while(i<2*FRAME_PER_BUFFER && wah<=maxf && monte){
-	//printf("%f\n", wah);
-	fc[i++] = wah;
-	wah+=delta;
+      while(i<2*FRAME_PER_BUFFER && (*wah)<=maxf && *monte){
+	//printf("%f\n", (*wah));
+	fc[i++] = (*wah);
+	(*wah)+=delta;
       }
 
-      if(wah>maxf)
-	monte = !monte;
+      if(*wah>maxf)
+	*monte = !(*monte);
       
-      while(i<2*FRAME_PER_BUFFER && wah>=minf && !monte){
-	fc[i++] = wah;
-	wah-=delta;
+      while(i<2*FRAME_PER_BUFFER && *wah>=minf && !(*monte)){
+	fc[i++] = (*wah);
+	(*wah)-=delta;
       }
 
-      if(wah<minf)
-	monte = !monte;
+      if((*wah)<minf)
+	*monte = !(*monte);
       
     }
 
@@ -133,38 +133,26 @@ void wahwah(float *in, float *out,int fw)
       outL[i] = f1*out[i] + outL[i-1];
       f1 = 2*sin((PI*fc[i])/SAMPLE_RATE);
     }
-
-  /*float max = maxTabAbs(out);
-
-  for(i=0;i<2*FRAME_PER_BUFFER;i++)
-    {
-      out[i]/=max;
-      }*/
-
 }
 
-int trem = 0;
+//int trem = 0;
 //const int tremMax = 8192;
 
-void tremolo(float *in, float *out, float alpha, float fc)
+void tremolo(float *in, float *out, float alpha, float fc, int *trem)
 {
   int i;
 
-  
-
   for(i=0;i<2*FRAME_PER_BUFFER;i++)
-    out[i] = in[i] * (1 + (alpha*sin(2*PI*(trem++)*(fc/(float)(SAMPLE_RATE)))));
+    out[i] = in[i] * (1 + (alpha*sin(2*PI*((*trem)++)*(fc/(float)(SAMPLE_RATE)))));
 
 
-  trem%=8192;
+  (*trem)%=8192;
 }
 
 
-void echo(float *in, float *out, float gain, float retard){
-  const int delayLine = (int)retard*SAMPLE_RATE/1000;
+void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
+  const int delayLine = (int)2*retard*SAMPLE_RATE/1000;
   int i;
-  //int indEcho =delayLine/TMAX;
-  //float gain1 = 0,gain2 = 1;
 
   if(delayLine>TMAX*2*FRAME_PER_BUFFER)
     exit(0);

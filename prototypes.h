@@ -16,7 +16,16 @@ typedef struct Buffer{
   int dernier;
 }Buffer;
 
-Buffer * listBuffer;
+typedef struct Data{
+  /* DATA tremolo */
+  int trem;
+
+  /* DATA Wah */
+  float wah;
+  int monte;
+
+  Buffer * listBuffer;
+}Data;
 
 
 typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,OFF}FX;

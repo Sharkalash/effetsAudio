@@ -34,11 +34,11 @@ void fuzz(float* in,float *out, float gain, float mix);
 
 void overdrive(float *in, float *out);
 
-void wahwah(float *in, float *out,int fw);
+void wahwah(float *in, float *out,int fw, float *wah, int * monte);
 
-void tremolo(float *in, float *out, float alpha, float fc);
+void tremolo(float *in, float *out, float alpha, float fc, int *trem);
 
-void echo(float *in, float *out, float gain, float retard);
+void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer);
 
 
 #endif 

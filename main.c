@@ -9,14 +9,16 @@
 static FX effets[NB_EFFETS];
 
 
-void creerBuffer(){
-  listBuffer = malloc(sizeof(Buffer));
+Buffer * creerBuffer(){
+  Buffer * listBuffer = malloc(sizeof(Buffer));
 
   listBuffer->premier = 0;
   listBuffer->dernier = 0;
+
+  return listBuffer;
 }
 
-void push(float *in){
+void push(Buffer *listBuffer, float *in){
   listBuffer->dernier = (listBuffer->dernier+1)%TMAX;
   
   if(listBuffer->premier == listBuffer->dernier){
@@ -26,7 +28,7 @@ void push(float *in){
   copie(in,listBuffer->buffer[listBuffer->dernier]);
 }
 
-void libererBuffer(){
+void libererBuffer(Buffer *listBuffer){
   free(listBuffer);
 }
 
@@ -34,7 +36,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 			  const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
   //Empecher d'avoir des warnings unused variable
-  userData = (void *)userData;
+  Data * data = (Data *)userData;
   timeInfo = (void *)timeInfo;
   statusFlags = statusFlags;
   //framesPerBuffer *=1;
@@ -49,12 +51,12 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(effets[2]==WAH){
     copie(out,copy);
-    wahwah(copy,out,3000);
+    wahwah(copy,out,3000,&(data->wah),&(data->monte));
   }
 
   if(effets[3]==TREMOLO){
     copie(out,copy);
-    tremolo(copy,out,0.5,5);
+    tremolo(copy,out,0.5,5,&(data->trem));
   }
   
   if(effets[0]==FUZZ){
@@ -69,21 +71,34 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   
   if(effets[4]==ECHO){
     copie(out,copy);
-    echo(copy,out,0.5,600);
+    echo(copy,out,0.5,200,data->listBuffer);
   }
   
-  push(in);
+  push(data->listBuffer,in);
   free(copy);
   return 0;
+}
+
+Data initData(){
+  Data data;
+  data.trem = 0;
+  data.wah = 500;
+  data.monte = 1;
+  data.listBuffer = creerBuffer();
+
+  return data;
 }
 
 int main()
 {
   PaStream *stream;
   PaError err;
+  Data data = initData(); //Initialisation des données
 
   int i;
-  creerBuffer();
+  
+  /* Initilisation des effets à OFF */
+  
   for(i=0;i<NB_EFFETS;i++)
     effets[i] = OFF;
   
@@ -97,10 +112,10 @@ int main()
 			     2, //input channels
 			     2, //output. 2 pour stereo
 			     PA_SAMPLE_TYPE, // 32 bit floating point output
-			     SAMPLE_RATE,
+			     SAMPLE_RATE, //Fréquence d'échantillonage
 			     FRAME_PER_BUFFER,// frames per buffer 
 			     audioFXCallback, //Callback function
-			     NULL);//Pointer passé au callback
+			     &data);//Data passées au callback
 
 
   if (err != paNoError) {
@@ -147,11 +162,11 @@ int main()
     printf("PortAudio error : %s\n", Pa_GetErrorText(err));
   }
 
-  libererBuffer();
+  libererBuffer(data.listBuffer);
   return 0;
 
  error:
-  libererBuffer();
+  libererBuffer(data.listBuffer);
   Pa_Terminate();
   fprintf(stderr, "ERROR ERROR ERROR\n");
   fprintf( stderr, "Error number: %d\n", err );
