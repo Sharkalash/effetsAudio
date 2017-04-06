@@ -32,14 +32,14 @@ void copie(float *src, float* dest);
 void fuzz(float* in,float *out, float gain, float mix);
 
 
-void overdrive(float *in, float *out);
+void overdrive(float *in, float *out, int drive);
 
 void wahwah(float *in, float *out,int fw, float *wah, int * monte);
 
 void tremolo(float *in, float *out, float alpha, float fc, int *trem);
 
 void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer);
-
+void flanger(float *in, float* out,float amp, Buffer *listBuffer);
 
 #endif 
 

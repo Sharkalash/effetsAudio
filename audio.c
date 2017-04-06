@@ -60,26 +60,31 @@ void fuzz(float* in,float *out, float gain, float mix)
 
 }
 
-void overdrive(float *in, float *out)
+void overdrive(float *in, float *out, int drive)
 {
-  float th = 1./3.;
-  unsigned int i;  
-  
-  for(i=0;i<2*FRAME_PER_BUFFER;i++)
+  if(drive >= 1)
     {
-      if (fabs(in[i]) < th)
+      float th = 1./3.;
+      unsigned int i;  
+  
+      for(i=0;i<2*FRAME_PER_BUFFER;i++)
 	{
-	  out[i] = 2 * in[i];
-	}
-      else if (fabs(in[i]) >= th && fabs(in[i]) < 2 * th)
-	{
-	  out[i] = SIGN(in[i])*(3 - powf((2 - 3 * fabs(in[i])), 2)) / 3.;
-	}
-      else
-	{
-	  out[i] = SIGN(in[i]);
-	}
+	  if (fabs(in[i]) < th)
+	    {
+	      out[i] = 2 * in[i];
+	    }
+	  else if (fabs(in[i]) >= th && fabs(in[i]) < 2 * th)
+	    {
+	      out[i] = SIGN(in[i])*(3 - powf((2 - 3 * fabs(in[i])), 2)) / 3.;
+	    }
+	  else
+	    {
+	      out[i] = SIGN(in[i]);
+	    }
 
+	}
+      copie(out,in);
+      overdrive(in,out,drive-1);
     }
 
 }
@@ -168,7 +173,7 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
       int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
       if(numBuffer<0)
 	numBuffer += TMAX-1;
-      //int lr = (i%2)==0 && r%(2*FRAME_PER_BUFFER)
+ 
       int ind = r%(2*FRAME_PER_BUFFER);
       out[i] =in[i]+ gain*listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - ind -1];
       
@@ -176,3 +181,37 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
   }
 }
 
+void flanger(float *in, float* out,float amp, Buffer *listBuffer)
+{
+  float max_time_delay=0.003;
+  int rate = 51; //Pourcentage de flange en Hz
+  float* sin_ref = (float *)malloc(sizeof(float)*2*FRAME_PER_BUFFER); //Reféférence sinusoidale pour créer un retard oscillant
+  unsigned int i;
+  int max_sample_delay = round(max_time_delay);
+
+  for(i=0;i<2*FRAME_PER_BUFFER;i++){
+    sin_ref[i] = sin(2*PI*(i+1)*((float)(rate)/(float)(SAMPLE_RATE))); 
+  }
+
+  for(i=0;i<2*FRAME_PER_BUFFER;i++){
+    int delay = (int) (fabs(sin_ref[i]*max_sample_delay));
+
+    int r = i-delay;
+
+    if(r>=0){
+      out[i] = amp*(in[i] + in[r]);
+    }
+    else{
+      r=-r;
+      int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
+      if(numBuffer<0)
+	numBuffer += TMAX-1;
+ 
+      int ind = r%(2*FRAME_PER_BUFFER);
+      out[i] = amp*(in[i] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - ind -1]);
+      
+    }
+  }
+  free(sin_ref);
+}
+    

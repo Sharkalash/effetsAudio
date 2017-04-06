@@ -66,12 +66,17 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(effets[1]==OVERDRIVE){
     copie(out,copy);
-    overdrive(copy,out);
+    overdrive(copy,out,5);
+  }
+
+  if(effets[5]==FLANGER){
+    copie(out,copy);
+    flanger(copy,out,0.7,data->listBuffer);
   }
   
   if(effets[4]==ECHO){
     copie(out,copy);
-    echo(copy,out,0.5,200,data->listBuffer);
+    echo(copy,out,0.5,1000,data->listBuffer);
   }
   
   push(data->listBuffer,in);
@@ -81,6 +86,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
 Data initData(){
   Data data;
+  
   data.trem = 0;
   data.wah = 500;
   data.monte = 1;
@@ -144,6 +150,9 @@ int main()
       break;
     case 'e':
       effets[4]=effets[4]==OFF?ECHO:OFF;
+      break;
+    case 'g':
+      effets[5]=effets[5]==OFF?FLANGER:OFF;
       break;
     }
    
