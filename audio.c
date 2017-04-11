@@ -215,4 +215,39 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange)
   }
   
 }
-    
+
+
+void chorus (float *in, float *out, float gain, Buffer *listBuffer)
+{
+  const int MIN = 10, MAX = 25;
+  int delayLine, i;
+  float retard;
+
+  retard = (rand() % (MAX - MIN + 1)) + MIN;
+  
+  for (i = 0 ; i < FRAME_PER_BUFFER ; i++)
+    {
+      
+      delayLine = (int) retard * SAMPLE_RATE / 1000;
+      int r = i - delayLine;
+      if ( r >= 0)
+	{
+	  out[2*i] =  in[2*i] + gain * in[2*r];
+	  out[2*i + 1] =  in[2*i + 1] + gain * in[2*r + 1];
+	}
+      else
+	{
+	  r = -r;
+	  int numBuffer = listBuffer->dernier - (int) (r / (FRAME_PER_BUFFER));
+	  if (numBuffer < 0)
+	    {
+	      numBuffer += TMAX-1;
+	    }
+ 
+	  int ind = r % (FRAME_PER_BUFFER);
+	  out[2*i] = in[2*i] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 1 - 2*ind];
+	  out[2*i+1] = in[2*i+1] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 1 - 2*ind - 1];
+	  
+	}
+    }
+}

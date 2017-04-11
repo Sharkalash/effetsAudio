@@ -41,5 +41,6 @@ void tremolo(float *in, float *out, float alpha, float fc, int *trem);
 void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer);
 void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange);
 
+void chorus (float *in, float *out, float gain, Buffer *listBuffer);
 #endif 
 

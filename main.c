@@ -64,6 +64,12 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     fuzz(copy,out,gain,mix);
   }
 
+  if (effets[6] == CHORUS)
+    {
+      copie(out,copy);
+      chorus(copy, out, 0.5, data->listBuffer);
+    }
+  
   if(effets[1]==OVERDRIVE){
     copie(out,copy);
     overdrive(copy,out,5);
@@ -154,6 +160,9 @@ int main()
       break;
     case 'g':
       effets[5]=effets[5]==OFF?FLANGER:OFF;
+      break;
+    case 'c':
+      effets[6] = (effets[6] == OFF)? CHORUS : OFF;
       break;
     }
    

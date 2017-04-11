@@ -4,7 +4,7 @@
 #define SAMPLE_RATE 44100
 #define FRAME_PER_BUFFER 256
 #define PA_SAMPLE_TYPE paFloat32
-#define NB_EFFETS 6
+#define NB_EFFETS 7
 #define TMAX 200
 
 #define TAILLE_BUFFER TMAX*2*FRAME_PER_BUFFER
@@ -31,6 +31,6 @@ typedef struct Data{
 }Data;
 
 
-typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,FLANGER,OFF}FX;
+typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,FLANGER,CHORUS,OFF}FX;
 
 #endif
