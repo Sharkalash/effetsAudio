@@ -24,6 +24,9 @@ typedef struct Data{
   float wah;
   int monte;
 
+  /* DATA flanger */
+  int flange;
+
   Buffer * listBuffer;
 }Data;
 

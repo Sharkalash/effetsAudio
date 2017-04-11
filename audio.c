@@ -181,37 +181,38 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
   }
 }
 
-void flanger(float *in, float* out,float amp, Buffer *listBuffer)
+void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange)
 {
   float max_time_delay=0.003;
-  int rate = 51; //Pourcentage de flange en Hz
-  float* sin_ref = (float *)malloc(sizeof(float)*2*FRAME_PER_BUFFER); //Reféférence sinusoidale pour créer un retard oscillant
+  int rate = 1; //Pourcentage de flange en Hz
   unsigned int i;
-  int max_sample_delay = round(max_time_delay);
+  int max_sample_delay = round(max_time_delay*SAMPLE_RATE);
+ 
 
-  for(i=0;i<2*FRAME_PER_BUFFER;i++){
-    sin_ref[i] = sin(2*PI*(i+1)*((float)(rate)/(float)(SAMPLE_RATE))); 
-  }
+  for(i=0;i<FRAME_PER_BUFFER;i++){
+    int delay =  ceil(fabs(sin(2*PI*((*flange)++)*((float)(rate)/(float)(SAMPLE_RATE)))*max_sample_delay));
 
-  for(i=0;i<2*FRAME_PER_BUFFER;i++){
-    int delay = (int) (fabs(sin_ref[i]*max_sample_delay));
-
+    //printf("%f\n", (float)(rate)/(float)(SAMPLE_RATE));
+    
     int r = i-delay;
 
     if(r>=0){
-      out[i] = amp*(in[i] + in[r]);
+      out[2*i] = amp*(in[2*i] + in[2*r]);
+      out[2*i+1] = amp*(in[2*i+1] + in[2*r+1]);
     }
     else{
       r=-r;
       int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
+      
       if(numBuffer<0)
 	numBuffer += TMAX-1;
  
-      int ind = r%(2*FRAME_PER_BUFFER);
-      out[i] = amp*(in[i] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - ind -1]);
+      int ind = r%(FRAME_PER_BUFFER);
+      out[2*i] = amp*(in[2*i] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -2]);
+      out[2*i+1] = amp*(in[2*i+1] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -1]);
       
     }
   }
-  free(sin_ref);
+  
 }
     

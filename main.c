@@ -71,7 +71,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(effets[5]==FLANGER){
     copie(out,copy);
-    flanger(copy,out,0.7,data->listBuffer);
+    flanger(copy,out,0.7,data->listBuffer,&(data->flange));
   }
   
   if(effets[4]==ECHO){
@@ -91,6 +91,7 @@ Data initData(){
   data.wah = 500;
   data.monte = 1;
   data.listBuffer = creerBuffer();
+  data.flange = 0;
 
   return data;
 }

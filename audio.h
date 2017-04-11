@@ -39,7 +39,7 @@ void wahwah(float *in, float *out,int fw, float *wah, int * monte);
 void tremolo(float *in, float *out, float alpha, float fc, int *trem);
 
 void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer);
-void flanger(float *in, float* out,float amp, Buffer *listBuffer);
+void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange);
 
 #endif 
 
