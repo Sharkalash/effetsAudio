@@ -6,8 +6,12 @@
 #define PA_SAMPLE_TYPE paFloat32
 #define NB_EFFETS 7
 #define TMAX 200
+#define HAUTEUR 480
+#define LARGEUR 640
 
 #define TAILLE_BUFFER TMAX*2*FRAME_PER_BUFFER
+
+typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,FLANGER,CHORUS,OFF}FX;
 
 //Structure pour mémoriser les buffers d'entrée
 typedef struct Buffer{
@@ -28,9 +32,10 @@ typedef struct Data{
   int flange;
 
   Buffer * listBuffer;
+  FX effets[NB_EFFETS];
 }Data;
 
 
-typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,FLANGER,CHORUS,OFF}FX;
+
 
 #endif

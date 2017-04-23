@@ -3,7 +3,7 @@ DEBUG = yes
 EXE = audioFX
 SRC = $(wildcard *.c)#Génération de la liste des fichiers sources
 OBJ = $(SRC:.c=.o)#Génération de la liste des fichiers objets
-LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread #Bibliothèques
+LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread -lSDL -lSDL_ttf #Bibliothèques
 
 ifeq ($(DEBUG), yes) #Condtions
 $(info "Mode debug")

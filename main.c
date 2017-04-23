@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <portaudio.h>
 #include <math.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include "prototypes.h"
 #include "audio.h"
  
-
-static FX effets[NB_EFFETS];
-
-
 Buffer * creerBuffer(){
   Buffer * listBuffer = malloc(sizeof(Buffer));
 
@@ -49,38 +47,38 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   copie(in,out);
 
 
-  if(effets[2]==WAH){
+  if(data->effets[2]==WAH){
     copie(out,copy);
     wahwah(copy,out,3000,&(data->wah),&(data->monte));
   }
 
-  if(effets[3]==TREMOLO){
+  if(data->effets[3]==TREMOLO){
     copie(out,copy);
     tremolo(copy,out,0.5,5,&(data->trem));
   }
   
-  if(effets[0]==FUZZ){
+  if(data->effets[0]==FUZZ){
     copie(out,copy);
     fuzz(copy,out,gain,mix);
   }
 
-  if (effets[6] == CHORUS)
+  if(data->effets[6] == CHORUS)
     {
       copie(out,copy);
       chorus(copy, out, 0.5, data->listBuffer);
     }
   
-  if(effets[1]==OVERDRIVE){
+  if(data->effets[1]==OVERDRIVE){
     copie(out,copy);
     overdrive(copy,out,5);
   }
 
-  if(effets[5]==FLANGER){
+  if(data->effets[5]==FLANGER){
     copie(out,copy);
     flanger(copy,out,0.7,data->listBuffer,&(data->flange));
   }
   
-  if(effets[4]==ECHO){
+  if(data->effets[4]==ECHO){
     copie(out,copy);
     echo(copy,out,0.5,1000,data->listBuffer);
   }
@@ -92,6 +90,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
 Data initData(){
   Data data;
+  int i;
   
   data.trem = 0;
   data.wah = 500;
@@ -99,24 +98,27 @@ Data initData(){
   data.listBuffer = creerBuffer();
   data.flange = 0;
 
+  /* Initilisation des effets à OFF */
+  
+  for(i=0;i<NB_EFFETS;i++)
+    data.effets[i] = OFF;
+
   return data;
 }
 
 int main()
 {
+  SDL_Surface *ecran = NULL;
   PaStream *stream;
   PaError err;
   Data data = initData(); //Initialisation des données
 
-  int i;
-  
-  /* Initilisation des effets à OFF */
-  
-  for(i=0;i<NB_EFFETS;i++)
-    effets[i] = OFF;
-  
-  
   creerBuffer();
+
+  SDL_Init(SDL_INIT_VIDEO);
+
+  ecran = SDL_SetVideoMode(LARGEUR,HAUTEUR, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+  
   err=Pa_Initialize();
 
   if(err!=paNoError ) goto error;
@@ -136,7 +138,10 @@ int main()
   }
 
   if((err=Pa_StartStream(stream))!=paNoError) goto error;
-  char c = 0;
+  // char c = 0;
+
+  pedalier(ecran,data.effets);
+  /*
   do{
     c = getc(stdin);
     while(getc(stdin)!='\n');//On vide le buffer
@@ -144,29 +149,29 @@ int main()
 
     switch(c){
     case 'f':
-      effets[0]=effets[0]==OFF?FUZZ:OFF;
+      data.effets[0]=data.effets[0]==OFF?FUZZ:OFF;
       break;
     case 'o':
-      effets[1]=effets[1]==OFF?OVERDRIVE:OFF;
+      data.effets[1]=data.effets[1]==OFF?OVERDRIVE:OFF;
       break;
     case 'w':
-      effets[2]=effets[2]==OFF?WAH:OFF;
+      data.effets[2]=data.effets[2]==OFF?WAH:OFF;
       break;
     case 't':
-      effets[3]=effets[3]==OFF?TREMOLO:OFF;
+      data.effets[3]=data.effets[3]==OFF?TREMOLO:OFF;
       break;
     case 'e':
-      effets[4]=effets[4]==OFF?ECHO:OFF;
+      data.effets[4]=data.effets[4]==OFF?ECHO:OFF;
       break;
     case 'g':
-      effets[5]=effets[5]==OFF?FLANGER:OFF;
+      data.effets[5]=data.effets[5]==OFF?FLANGER:OFF;
       break;
     case 'c':
-      effets[6] = (effets[6] == OFF)? CHORUS : OFF;
+      data.effets[6] = (data.effets[6] == OFF)? CHORUS : OFF;
       break;
     }
    
-  }while(c!='q');
+    }while(c!='q');*/
   
   err = Pa_StopStream(stream);
   if(err!=paNoError)
@@ -182,7 +187,11 @@ int main()
   }
 
   libererBuffer(data.listBuffer);
-  return 0;
+
+  SDL_FreeSurface(ecran);
+  SDL_Quit();
+  
+  return EXIT_SUCCESS;
 
  error:
   libererBuffer(data.listBuffer);
@@ -190,5 +199,7 @@ int main()
   fprintf(stderr, "ERROR ERROR ERROR\n");
   fprintf( stderr, "Error number: %d\n", err );
   fprintf( stderr, "Error message: %s\n", Pa_GetErrorText( err ) );
+  SDL_FreeSurface(ecran);
+  SDL_Quit();
   return err;
 }
