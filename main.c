@@ -116,6 +116,7 @@ int main()
   creerBuffer();
 
   SDL_Init(SDL_INIT_VIDEO);
+  TTF_Init();
 
   ecran = SDL_SetVideoMode(LARGEUR,HAUTEUR, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   
@@ -189,6 +190,7 @@ int main()
   libererBuffer(data.listBuffer);
 
   SDL_FreeSurface(ecran);
+  TTF_Quit();
   SDL_Quit();
   
   return EXIT_SUCCESS;
@@ -200,6 +202,7 @@ int main()
   fprintf( stderr, "Error number: %d\n", err );
   fprintf( stderr, "Error message: %s\n", Pa_GetErrorText( err ) );
   SDL_FreeSurface(ecran);
+  TTF_Quit();
   SDL_Quit();
   return err;
 }
