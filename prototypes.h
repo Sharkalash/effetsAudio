@@ -11,7 +11,8 @@
 
 #define TAILLE_BUFFER TMAX*2*FRAME_PER_BUFFER
 
-typedef enum FX {FUZZ,OVERDRIVE,WAH,TREMOLO,ECHO,FLANGER,CHORUS,OFF}FX;
+typedef enum FX {WAH,TREMOLO,FUZZ,OVERDRIVE,FLANGER,CHORUS,ECHO}FX;
+typedef enum ETAT{ON,OFF}ETAT;
 
 //Structure pour mémoriser les buffers d'entrée
 typedef struct Buffer{
@@ -32,7 +33,7 @@ typedef struct Data{
   int flange;
 
   Buffer * listBuffer;
-  FX effets[NB_EFFETS];
+  ETAT effets[NB_EFFETS];
 }Data;
 
 

@@ -6,6 +6,7 @@
 #include <SDL/SDL_ttf.h>
 #include "prototypes.h"
 #include "audio.h"
+#include "affichage.h"
  
 Buffer * creerBuffer(){
   Buffer * listBuffer = malloc(sizeof(Buffer));
@@ -47,43 +48,43 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   copie(in,out);
 
 
-  if(data->effets[2]==WAH){
+  if(data->effets[WAH]==ON){
     copie(out,copy);
     wahwah(copy,out,3000,&(data->wah),&(data->monte));
   }
 
-  if(data->effets[3]==TREMOLO){
+  if(data->effets[TREMOLO]==ON){
     copie(out,copy);
     tremolo(copy,out,0.5,5,&(data->trem));
   }
   
-  if(data->effets[0]==FUZZ){
+  if(data->effets[FUZZ]==ON){
     copie(out,copy);
     fuzz(copy,out,gain,mix);
   }
 
-  if(data->effets[6] == CHORUS)
+  if(data->effets[OVERDRIVE]==ON){
+    copie(out,copy);
+    overdrive(copy,out,5);
+  }
+
+  if(data->effets[FLANGER]==ON){
+    copie(out,copy);
+    flanger(copy,out,0.7,data->listBuffer,&(data->flange));
+  }
+
+  if(data->effets[CHORUS] == ON)
     {
       copie(out,copy);
       chorus(copy, out, 0.5, data->listBuffer);
     }
   
-  if(data->effets[1]==OVERDRIVE){
-    copie(out,copy);
-    overdrive(copy,out,5);
-  }
-
-  if(data->effets[5]==FLANGER){
-    copie(out,copy);
-    flanger(copy,out,0.7,data->listBuffer,&(data->flange));
-  }
-  
-  if(data->effets[4]==ECHO){
+  if(data->effets[ECHO]==ON){
     copie(out,copy);
     echo(copy,out,0.5,1000,data->listBuffer);
   }
   
-  push(data->listBuffer,in);
+  push(data->listBuffer,out);
   free(copy);
   return 0;
 }
@@ -117,7 +118,7 @@ int main()
 
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();
-
+  
   ecran = SDL_SetVideoMode(LARGEUR,HAUTEUR, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   
   err=Pa_Initialize();
@@ -140,7 +141,7 @@ int main()
 
   if((err=Pa_StartStream(stream))!=paNoError) goto error;
   // char c = 0;
-
+  
   pedalier(ecran,data.effets);
   /*
   do{
