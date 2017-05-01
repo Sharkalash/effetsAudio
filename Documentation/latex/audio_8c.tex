@@ -1,0 +1,280 @@
+\hypertarget{audio_8c}{}\section{Référence du fichier audio.\+c}
+\label{audio_8c}\index{audio.\+c@{audio.\+c}}
+
+
+Fichier gérant l\textquotesingle{}implémentation des effets.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}prototypes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}audio.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de audio.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{audio_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{audio_8c_a7274a1d53b113acf107471994fdb5039}{max\+Tab\+Abs} (float $\ast$tab)
+\begin{DoxyCompactList}\small\item\em Maximum d\textquotesingle{}un tableau en valeur absolu. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_a3e7867b1e230dc6f63c5d6572379fee2}{copie} (float $\ast$src, float $\ast$dest)
+\begin{DoxyCompactList}\small\item\em Copie un tableau dans un autre. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_abc8a4cb48273e1a25a5036c688e10cc1}{fuzz} (float $\ast$in, float $\ast$out, float gain, float mix)
+\begin{DoxyCompactList}\small\item\em Applique un effet fuzz au son. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_acaa7183c60d77c306a447aaa4aa72201}{overdrive} (float $\ast$in, float $\ast$out, int drive)
+\begin{DoxyCompactList}\small\item\em Applique l\textquotesingle{}effet overdrive au son. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_a9b52b9ea406a57d166295da272e3d8b9}{wahwah} (float $\ast$in, float $\ast$out, int fw, float $\ast$wah, int $\ast$monte)
+\begin{DoxyCompactList}\small\item\em Applique un effet wah-\/wah automatique au signal. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_a5c20ec4b8b7d35d17d75978ea0849ce5}{tremolo} (float $\ast$in, float $\ast$out, float alpha, float fc, int $\ast$trem)
+\begin{DoxyCompactList}\small\item\em Applique un effet tremolo au signal. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_aa5af6c6e5968aca623175887be170409}{echo} (float $\ast$in, float $\ast$out, float gain, float retard, \hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer)
+\begin{DoxyCompactList}\small\item\em Applique un effet echo au signal. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_a18517ad44351215d07eea5c790380b96}{flanger} (float $\ast$in, float $\ast$out, float amp, \hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer, int $\ast$flange)
+\begin{DoxyCompactList}\small\item\em Applique l\textquotesingle{}effet flanger au signal. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_aa8ead572276ff8badba53fee211b87f7}{chorus} (float $\ast$in, float $\ast$out, float gain, \hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer)
+\begin{DoxyCompactList}\small\item\em Applique l\textquotesingle{}effet chorus au signal. \end{DoxyCompactList}\item 
+void {\bfseries filter} (float $\ast$a, float $\ast$b, float $\ast$in, float $\ast$out)\hypertarget{audio_8c_acf97b3846ac7e120ad9b08b41c8f9e38}{}\label{audio_8c_acf97b3846ac7e120ad9b08b41c8f9e38}
+
+\item 
+void {\bfseries shelving} (float $\ast$in, float $\ast$out, float gain, float fc, float Q, EQ type)\hypertarget{audio_8c_a805e50812ba33cd26bc028cddaffca9c}{}\label{audio_8c_a805e50812ba33cd26bc028cddaffca9c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Fichier gérant l\textquotesingle{}implémentation des effets. 
+
+
+
+\subsection{Documentation des fonctions}
+\index{audio.\+c@{audio.\+c}!chorus@{chorus}}
+\index{chorus@{chorus}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{chorus(float $\ast$in, float $\ast$out, float gain, Buffer $\ast$list\+Buffer)}{chorus(float *in, float *out, float gain, Buffer *listBuffer)}}]{\setlength{\rightskip}{0pt plus 5cm}void chorus (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{float}]{gain, }
+\item[{{\bf Buffer} $\ast$}]{list\+Buffer}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_aa8ead572276ff8badba53fee211b87f7}{}\label{audio_8c_aa8ead572276ff8badba53fee211b87f7}
+
+
+Applique l\textquotesingle{}effet chorus au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & Le buffer de sortie \\
+\hline
+{\em gain} & Niveau de gain \\
+\hline
+{\em list\+Buffer} & La liste des buffer en mémoire \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!copie@{copie}}
+\index{copie@{copie}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{copie(float $\ast$src, float $\ast$dest)}{copie(float *src, float *dest)}}]{\setlength{\rightskip}{0pt plus 5cm}void copie (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{src, }
+\item[{float $\ast$}]{dest}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a3e7867b1e230dc6f63c5d6572379fee2}{}\label{audio_8c_a3e7867b1e230dc6f63c5d6572379fee2}
+
+
+Copie un tableau dans un autre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em src} & Tableau source \\
+\hline
+{\em dest} & Tableau de destination \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!echo@{echo}}
+\index{echo@{echo}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{echo(float $\ast$in, float $\ast$out, float gain, float retard, Buffer $\ast$list\+Buffer)}{echo(float *in, float *out, float gain, float retard, Buffer *listBuffer)}}]{\setlength{\rightskip}{0pt plus 5cm}void echo (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{float}]{gain, }
+\item[{float}]{retard, }
+\item[{{\bf Buffer} $\ast$}]{list\+Buffer}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_aa5af6c6e5968aca623175887be170409}{}\label{audio_8c_aa5af6c6e5968aca623175887be170409}
+
+
+Applique un effet echo au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & le buffer de sortie \\
+\hline
+{\em gain} & Niveau de gain \\
+\hline
+{\em retard} & Le retard en ms de l\textquotesingle{}echo \\
+\hline
+{\em list\+Buffer} & La liste des buffer en mémoire \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!flanger@{flanger}}
+\index{flanger@{flanger}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{flanger(float $\ast$in, float $\ast$out, float amp, Buffer $\ast$list\+Buffer, int $\ast$flange)}{flanger(float *in, float *out, float amp, Buffer *listBuffer, int *flange)}}]{\setlength{\rightskip}{0pt plus 5cm}void flanger (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{float}]{amp, }
+\item[{{\bf Buffer} $\ast$}]{list\+Buffer, }
+\item[{int $\ast$}]{flange}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a18517ad44351215d07eea5c790380b96}{}\label{audio_8c_a18517ad44351215d07eea5c790380b96}
+
+
+Applique l\textquotesingle{}effet flanger au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & Le buffer de sortie \\
+\hline
+{\em amp} & Niveau d\textquotesingle{}amplification \\
+\hline
+{\em list\+Buffer} & La liste des buffer en mémoire \\
+\hline
+{\em flange} & Pour éviter de revenir au début de la sinusoide à chaque nouveau buffer \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!fuzz@{fuzz}}
+\index{fuzz@{fuzz}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{fuzz(float $\ast$in, float $\ast$out, float gain, float mix)}{fuzz(float *in, float *out, float gain, float mix)}}]{\setlength{\rightskip}{0pt plus 5cm}void fuzz (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{float}]{gain, }
+\item[{float}]{mix}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_abc8a4cb48273e1a25a5036c688e10cc1}{}\label{audio_8c_abc8a4cb48273e1a25a5036c688e10cc1}
+
+
+Applique un effet fuzz au son. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & \hyperlink{structBuffer}{Buffer} d\textquotesingle{}entree du son \\
+\hline
+{\em out} & buffer de sortie du son \\
+\hline
+{\em gain} & Montant de distortion \\
+\hline
+{\em mix} & Mix du signal distordu et original \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Avertissement}
+mix doit être comprix entre 0 et 1 
+\end{DoxyWarning}
+\index{audio.\+c@{audio.\+c}!max\+Tab\+Abs@{max\+Tab\+Abs}}
+\index{max\+Tab\+Abs@{max\+Tab\+Abs}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{max\+Tab\+Abs(float $\ast$tab)}{maxTabAbs(float *tab)}}]{\setlength{\rightskip}{0pt plus 5cm}float max\+Tab\+Abs (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{tab}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a7274a1d53b113acf107471994fdb5039}{}\label{audio_8c_a7274a1d53b113acf107471994fdb5039}
+
+
+Maximum d\textquotesingle{}un tableau en valeur absolu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab} & Un tableau de flottant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Le maximum du tableau en valeur absolu 
+\end{DoxyReturn}
+\index{audio.\+c@{audio.\+c}!overdrive@{overdrive}}
+\index{overdrive@{overdrive}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{overdrive(float $\ast$in, float $\ast$out, int drive)}{overdrive(float *in, float *out, int drive)}}]{\setlength{\rightskip}{0pt plus 5cm}void overdrive (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{int}]{drive}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_acaa7183c60d77c306a447aaa4aa72201}{}\label{audio_8c_acaa7183c60d77c306a447aaa4aa72201}
+
+
+Applique l\textquotesingle{}effet overdrive au son. 
+
+On appelle la fonction récursivement pour augmenter l\textquotesingle{}effet 
+\begin{DoxyParams}{Paramètres}
+{\em in} & le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & le buffer de sortie \\
+\hline
+{\em drive} & Nombre d\textquotesingle{}appel récursif \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!tremolo@{tremolo}}
+\index{tremolo@{tremolo}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{tremolo(float $\ast$in, float $\ast$out, float alpha, float fc, int $\ast$trem)}{tremolo(float *in, float *out, float alpha, float fc, int *trem)}}]{\setlength{\rightskip}{0pt plus 5cm}void tremolo (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{float}]{alpha, }
+\item[{float}]{fc, }
+\item[{int $\ast$}]{trem}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a5c20ec4b8b7d35d17d75978ea0849ce5}{}\label{audio_8c_a5c20ec4b8b7d35d17d75978ea0849ce5}
+
+
+Applique un effet tremolo au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & Le buffer de sortie \\
+\hline
+{\em alpha} & Mixage signal d\textquotesingle{}entrée et modulation. Il est compris entre 0 et 1 sachant que 0 eteint la modulation et 1 donne le maximum de la modulation \\
+\hline
+{\em fc} & La fréquence de modulation \\
+\hline
+{\em trem} & Pour appliquer le tremolo en continu et ne pas recommencer à 0 sur chaque échantillon \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!wahwah@{wahwah}}
+\index{wahwah@{wahwah}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{wahwah(float $\ast$in, float $\ast$out, int fw, float $\ast$wah, int $\ast$monte)}{wahwah(float *in, float *out, int fw, float *wah, int *monte)}}]{\setlength{\rightskip}{0pt plus 5cm}void wahwah (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{int}]{fw, }
+\item[{float $\ast$}]{wah, }
+\item[{int $\ast$}]{monte}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a9b52b9ea406a57d166295da272e3d8b9}{}\label{audio_8c_a9b52b9ea406a57d166295da272e3d8b9}
+
+
+Applique un effet wah-\/wah automatique au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & Le buffer de sortie \\
+\hline
+{\em fw} & La fréquence de modulation \\
+\hline
+{\em wah} & La fréquence actuelle \\
+\hline
+{\em Booleen} & precisant la montée ou la descente de la fréquence \\
+\hline
+\end{DoxyParams}

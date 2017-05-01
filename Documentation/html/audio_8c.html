@@ -1,0 +1,579 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Documentation effet audio: Référence du fichier audio.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Documentation effet audio
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier audio.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier gérant l'implémentation des effets.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;prototypes.h&quot;</code><br />
+<code>#include &quot;audio.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de audio.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="audio_8c__incl.png" border="0" usemap="#audio_8c" alt=""/></div>
+<map name="audio_8c" id="audio_8c">
+<area shape="rect" id="node5" href="prototypes_8h_source.html" title="prototypes.h" alt="" coords="266,80,361,107"/>
+<area shape="rect" id="node6" href="audio_8h_source.html" title="audio.h" alt="" coords="385,80,449,107"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a7274a1d53b113acf107471994fdb5039"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a7274a1d53b113acf107471994fdb5039">maxTabAbs</a> (float *tab)</td></tr>
+<tr class="memdesc:a7274a1d53b113acf107471994fdb5039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum d'un tableau en valeur absolu.  <a href="#a7274a1d53b113acf107471994fdb5039">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7274a1d53b113acf107471994fdb5039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a3e7867b1e230dc6f63c5d6572379fee2">copie</a> (float *src, float *dest)</td></tr>
+<tr class="memdesc:a3e7867b1e230dc6f63c5d6572379fee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copie un tableau dans un autre.  <a href="#a3e7867b1e230dc6f63c5d6572379fee2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc8a4cb48273e1a25a5036c688e10cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#abc8a4cb48273e1a25a5036c688e10cc1">fuzz</a> (float *in, float *out, float gain, float mix)</td></tr>
+<tr class="memdesc:abc8a4cb48273e1a25a5036c688e10cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet fuzz au son.  <a href="#abc8a4cb48273e1a25a5036c688e10cc1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abc8a4cb48273e1a25a5036c688e10cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa7183c60d77c306a447aaa4aa72201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#acaa7183c60d77c306a447aaa4aa72201">overdrive</a> (float *in, float *out, int drive)</td></tr>
+<tr class="memdesc:acaa7183c60d77c306a447aaa4aa72201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet overdrive au son.  <a href="#acaa7183c60d77c306a447aaa4aa72201">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acaa7183c60d77c306a447aaa4aa72201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b52b9ea406a57d166295da272e3d8b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a9b52b9ea406a57d166295da272e3d8b9">wahwah</a> (float *in, float *out, int fw, float *wah, int *monte)</td></tr>
+<tr class="memdesc:a9b52b9ea406a57d166295da272e3d8b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet wah-wah automatique au signal.  <a href="#a9b52b9ea406a57d166295da272e3d8b9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9b52b9ea406a57d166295da272e3d8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c20ec4b8b7d35d17d75978ea0849ce5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a5c20ec4b8b7d35d17d75978ea0849ce5">tremolo</a> (float *in, float *out, float alpha, float fc, int *trem)</td></tr>
+<tr class="memdesc:a5c20ec4b8b7d35d17d75978ea0849ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet tremolo au signal.  <a href="#a5c20ec4b8b7d35d17d75978ea0849ce5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5c20ec4b8b7d35d17d75978ea0849ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5af6c6e5968aca623175887be170409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#aa5af6c6e5968aca623175887be170409">echo</a> (float *in, float *out, float gain, float retard, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
+<tr class="memdesc:aa5af6c6e5968aca623175887be170409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet echo au signal.  <a href="#aa5af6c6e5968aca623175887be170409">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa5af6c6e5968aca623175887be170409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18517ad44351215d07eea5c790380b96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a18517ad44351215d07eea5c790380b96">flanger</a> (float *in, float *out, float amp, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer, int *flange)</td></tr>
+<tr class="memdesc:a18517ad44351215d07eea5c790380b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet flanger au signal.  <a href="#a18517ad44351215d07eea5c790380b96">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a18517ad44351215d07eea5c790380b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ead572276ff8badba53fee211b87f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#aa8ead572276ff8badba53fee211b87f7">chorus</a> (float *in, float *out, float gain, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
+<tr class="memdesc:aa8ead572276ff8badba53fee211b87f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet chorus au signal.  <a href="#aa8ead572276ff8badba53fee211b87f7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa8ead572276ff8badba53fee211b87f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf97b3846ac7e120ad9b08b41c8f9e38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf97b3846ac7e120ad9b08b41c8f9e38"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b> (float *a, float *b, float *in, float *out)</td></tr>
+<tr class="separator:acf97b3846ac7e120ad9b08b41c8f9e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805e50812ba33cd26bc028cddaffca9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a805e50812ba33cd26bc028cddaffca9c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *in, float *out, float gain, float fc, float Q, EQ type)</td></tr>
+<tr class="separator:a805e50812ba33cd26bc028cddaffca9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier gérant l'implémentation des effets. </p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="aa8ead572276ff8badba53fee211b87f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void chorus </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
+          <td class="paramname"><em>listBuffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique l'effet chorus au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">gain</td><td>Niveau de gain </td></tr>
+    <tr><td class="paramname">listBuffer</td><td>La liste des buffer en mémoire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3e7867b1e230dc6f63c5d6572379fee2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void copie </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copie un tableau dans un autre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Tableau source </td></tr>
+    <tr><td class="paramname">dest</td><td>Tableau de destination </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa5af6c6e5968aca623175887be170409"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void echo </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>retard</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
+          <td class="paramname"><em>listBuffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un effet echo au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>le buffer de sortie </td></tr>
+    <tr><td class="paramname">gain</td><td>Niveau de gain </td></tr>
+    <tr><td class="paramname">retard</td><td>Le retard en ms de l'echo </td></tr>
+    <tr><td class="paramname">listBuffer</td><td>La liste des buffer en mémoire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a18517ad44351215d07eea5c790380b96"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void flanger </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>amp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
+          <td class="paramname"><em>listBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>flange</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique l'effet flanger au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">amp</td><td>Niveau d'amplification </td></tr>
+    <tr><td class="paramname">listBuffer</td><td>La liste des buffer en mémoire </td></tr>
+    <tr><td class="paramname">flange</td><td>Pour éviter de revenir au début de la sinusoide à chaque nouveau buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abc8a4cb48273e1a25a5036c688e10cc1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fuzz </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>mix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un effet fuzz au son. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td><a class="el" href="structBuffer.html">Buffer</a> d'entree du son </td></tr>
+    <tr><td class="paramname">out</td><td>buffer de sortie du son </td></tr>
+    <tr><td class="paramname">gain</td><td>Montant de distortion </td></tr>
+    <tr><td class="paramname">mix</td><td>Mix du signal distordu et original </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Avertissement</dt><dd>mix doit être comprix entre 0 et 1 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7274a1d53b113acf107471994fdb5039"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float maxTabAbs </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>tab</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum d'un tableau en valeur absolu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tab</td><td>Un tableau de flottant </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le maximum du tableau en valeur absolu </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acaa7183c60d77c306a447aaa4aa72201"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void overdrive </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>drive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique l'effet overdrive au son. </p>
+<p>On appelle la fonction récursivement pour augmenter l'effet </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>le buffer de sortie </td></tr>
+    <tr><td class="paramname">drive</td><td>Nombre d'appel récursif </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5c20ec4b8b7d35d17d75978ea0849ce5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tremolo </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>trem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un effet tremolo au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">alpha</td><td>Mixage signal d'entrée et modulation. Il est compris entre 0 et 1 sachant que 0 eteint la modulation et 1 donne le maximum de la modulation </td></tr>
+    <tr><td class="paramname">fc</td><td>La fréquence de modulation </td></tr>
+    <tr><td class="paramname">trem</td><td>Pour appliquer le tremolo en continu et ne pas recommencer à 0 sur chaque échantillon </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9b52b9ea406a57d166295da272e3d8b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void wahwah </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fw</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>wah</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>monte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un effet wah-wah automatique au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">fw</td><td>La fréquence de modulation </td></tr>
+    <tr><td class="paramname">wah</td><td>La fréquence actuelle </td></tr>
+    <tr><td class="paramname">Booleen</td><td>precisant la montée ou la descente de la fréquence </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

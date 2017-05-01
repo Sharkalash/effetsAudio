@@ -1,0 +1,52 @@
+\hypertarget{main_8c}{}\section{Référence du fichier main.\+c}
+\label{main_8c}\index{main.\+c@{main.\+c}}
+
+
+Projet effet audio -\/ Fichier principal.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$portaudio.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\\*
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}prototypes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}audio.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}affichage.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structBuffer}{Buffer} $\ast$ {\bfseries creer\+Buffer} ()\hypertarget{main_8c_aeac6a57809803dc95d2c2a55bde0611f}{}\label{main_8c_aeac6a57809803dc95d2c2a55bde0611f}
+
+\item 
+void {\bfseries push} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer, float $\ast$in)\hypertarget{main_8c_a30349e8abf179e11939304443da230fe}{}\label{main_8c_a30349e8abf179e11939304443da230fe}
+
+\item 
+void {\bfseries liberer\+Buffer} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer)\hypertarget{main_8c_a6934d2030dc10fb92693b66ad5f4891f}{}\label{main_8c_a6934d2030dc10fb92693b66ad5f4891f}
+
+\item 
+\hyperlink{structData}{Data} {\bfseries init\+Data} ()\hypertarget{main_8c_a55559823eed9a8f3c87934a44b1d766d}{}\label{main_8c_a55559823eed9a8f3c87934a44b1d766d}
+
+\item 
+int {\bfseries main} ()\hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Projet effet audio -\/ Fichier principal. 
+
+L\textquotesingle{}objectif est de reproduire les effets audios souvent utilisés dans la musique. \begin{DoxyAuthor}{Auteur}
+David B\+A\+L\+D\+A\+S\+S\+IN 
+
+Sylvain B\+O\+U\+R\+G\+EA 
+\end{DoxyAuthor}
