@@ -1,3 +1,11 @@
+/**
+ *\file main.c
+ *\brief Projet effet audio - Fichier principal
+ *\brief L'objectif est de reproduire les effets audios souvent utilisés dans la musique.
+ *\author David BALDASSIN
+ *\author Sylvain BOURGEA
+ */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <portaudio.h>
@@ -55,7 +63,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(data->effets[TREMOLO]==ON){
     copie(out,copy);
-    tremolo(copy,out,0.5,5,&(data->trem));
+    tremolo(copy,out,0.5,10,&(data->trem));
   }
   
   if(data->effets[FUZZ]==ON){
@@ -81,7 +89,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   
   if(data->effets[ECHO]==ON){
     copie(out,copy);
-    echo(copy,out,0.5,1000,data->listBuffer);
+    echo(copy,out,0.5,200,data->listBuffer);
   }
   
   push(data->listBuffer,out);

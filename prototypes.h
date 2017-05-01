@@ -13,6 +13,7 @@
 
 typedef enum FX {WAH,TREMOLO,FUZZ,OVERDRIVE,FLANGER,CHORUS,ECHO}FX;
 typedef enum ETAT{ON,OFF}ETAT;
+typedef enum EQ{BASS,TREBLE,ALL}EQ;
 
 //Structure pour mémoriser les buffers d'entrée
 typedef struct Buffer{

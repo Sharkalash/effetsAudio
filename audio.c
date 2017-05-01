@@ -1,3 +1,8 @@
+/**
+ *\file audio.c
+ *\brief Fichier gérant l'implémentation des effets
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -39,21 +44,11 @@ void fuzz(float* in,float *out, float gain, float mix)
   //Distortion du signal
   for(i=0;i<2*FRAME_PER_BUFFER;i++)
     {
-      q[i] = gain*in[i]; //Normalisation et ajout du gain
+      q[i] = gain*in[i]; //Ajout du gain
       z[i] = SIGN(-q[i])*(1-exp(SIGN(-q[i])*q[i])); //Signal distordu
+      out[i] = (mix*z[i]) + (1-mix)*in[i]; //Mix du signal, mix = 0 -> son clean, mix = 1 seulement distordu. mix est dans [0,1]
     }
-      
-
-
-  //Mix du signal, mix = 0 -> son clean, mix = 1 seulement distordu. mix est dans [0,1]
-  for(i=0;i<2*FRAME_PER_BUFFER;i++)
-    out[i] = (mix*z[i]) + (1-mix)*in[i];
-
-
-
-  //Normalisation
-  /*for(i=0;i<FRAME_PER_BUFFER;i++)
-    out[i] = out[i]*maxIN/maxOUT;*/
+    
 
   free(q);
   free(z);
@@ -150,7 +145,6 @@ void tremolo(float *in, float *out, float alpha, float fc, int *trem)
   for(i=0;i<2*FRAME_PER_BUFFER;i++)
     out[i] = in[i] * (1 + (alpha*sin(2*PI*((*trem)++)*(fc/(float)(SAMPLE_RATE)))));
 
-
   (*trem)%=8192;
 }
 
@@ -160,7 +154,7 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
   int i;
 
   if(delayLine>TMAX*2*FRAME_PER_BUFFER)
-    exit(0);
+    delayLine = TMAX*2*FRAME_PER_BUFFER;
 
     
   for(i=0;i<2*FRAME_PER_BUFFER;i++){
@@ -192,7 +186,7 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange)
   for(i=0;i<FRAME_PER_BUFFER;i++){
     int delay =  ceil(fabs(sin(2*PI*((*flange)++)*((float)(rate)/(float)(SAMPLE_RATE)))*max_sample_delay));
 
-    //printf("%f\n", (float)(rate)/(float)(SAMPLE_RATE));
+    (*flange)%=8192; //Pour eviter un trop grand nombre
     
     int r = i-delay;
 
@@ -251,3 +245,94 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer)
 	}
     }
 }
+
+void filter(float *a, float *b, float *in, float *out)
+{
+  int i;
+
+  for(i=0;i<FRAME_PER_BUFFER;i++)
+    {
+    }
+      
+}
+
+void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
+{
+  float k = tan((PI*fc)/SAMPLE_RATE);
+  float v0 = powf(10,gain/20);
+  float r = 1/Q;
+  float a[3], b[3];
+
+  //On inverse le gain si c'est un cut
+  if(v0 < 1)
+    v0 = 1/v0;
+
+  /* BASS BOOST */
+
+  if(gain > 0 &&  type == BASS)
+    {
+      float div = (1 + r*k + powf(k,2));
+      
+      b[0] = (1 + sqrt(v0)*r*k + v0*powf(k,2)) / div;
+      b[1] = (2*(v0*powf(k,2) - 1)) / div;
+      b[2] = (1 - sqrt(v0)*r*k + v0*powf(k,2)) / div;
+      a[1] = (2*(powf(k,2) - 1)) / div;
+      a[2] = (1 - r*k + powf(k,2)) / div;
+    }
+  
+  /* BASS CUT */
+  
+  else if (gain < 0 && type == BASS)
+    {
+      float div = (1 + r*sqrt(v0)*k + v0*powf(k,2));
+
+      b[0] = (1 + r*k + powf(k,2)) / div;
+      b[1] = (2*(powf(k,2) - 1)) / div;
+      b[2] = (1 - r*k + powf(k,2)) / div;
+      a[1] = (2*(v0*powf(k,2) - 1)) / div;
+      a[2] = (1 - r*k*sqrt(v0) + v0*powf(k,2)) / div;
+    }
+
+  /* TREBLE BOOST*/
+
+  else if(gain > 0 && type == TREBLE)
+    {
+      float div = (1 + r*k + powf(k,2));
+
+      b[0] = (V0 + sqrt(v0)*r*k + powf(k,2)) / div;
+      b[1] = (2*(powf(k,2) - v0)) / div;
+      b[2] = (v0 - sqrt(v0)*r*k + powf(k,2)) / div;
+      a[1] = (2*(powf(k,2) - 1)) / div;
+      a[2] = (1 - r*k + powf(k,2)) / div;
+
+    }
+
+  /* TREBLE CUT */
+
+  else if(gain < 0 && type == TREBLE)
+    {
+      float div = (v0 + r*sqrt(v0)*k + powf(k,2));
+
+      b[0] = (1 + r*k + powf(k,2)) / div;
+      b[1] = (2*(powf(k,2) - 1)) / div;
+      b[2] = (1 - r*k + powf(k,2)) / div;
+
+      div = (1 + r/sqrt(v0)*k + powf(k,2)/v0);
+      
+      a[1] = (2*(powf(k,2)/v0 - 1)) / div;
+      a[2] = (1 - r/sqrt(v0)*k + powf(k,2)/v0) / div;
+    }
+
+  /* ALL-PASS */
+
+  else {
+    b[0] = v0;
+    b[1] = b[2] = a[1] = a[2] = 0;
+  }
+
+  a[0] = 1;
+
+  filter(b,a,in,out);
+
+}
+      
