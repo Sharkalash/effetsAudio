@@ -150,7 +150,7 @@ void tremolo(float *in, float *out, float alpha, float fc, int *trem)
 
 
 void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
-  const int delayLine = (int)2*retard*SAMPLE_RATE/1000;
+  int delayLine = (int)2*retard*SAMPLE_RATE/1000;
   int i;
 
   if(delayLine>TMAX*2*FRAME_PER_BUFFER)
@@ -246,6 +246,8 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer)
     }
 }
 
+/*
+
 void filter(float *a, float *b, float *in, float *out)
 {
   int i;
@@ -267,7 +269,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
   if(v0 < 1)
     v0 = 1/v0;
 
-  /* BASS BOOST */
+  /* BASS BOOST */ /*
 
   if(gain > 0 &&  type == BASS)
     {
@@ -280,7 +282,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r*k + powf(k,2)) / div;
     }
   
-  /* BASS CUT */
+  /* BASS CUT */ /*
   
   else if (gain < 0 && type == BASS)
     {
@@ -293,7 +295,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r*k*sqrt(v0) + v0*powf(k,2)) / div;
     }
 
-  /* TREBLE BOOST*/
+  /* TREBLE BOOST*/ /*
 
   else if(gain > 0 && type == TREBLE)
     {
@@ -307,7 +309,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
 
     }
 
-  /* TREBLE CUT */
+  /* TREBLE CUT */ /*
 
   else if(gain < 0 && type == TREBLE)
     {
@@ -323,7 +325,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r/sqrt(v0)*k + powf(k,2)/v0) / div;
     }
 
-  /* ALL-PASS */
+  /* ALL-PASS */ /*
 
   else {
     b[0] = v0;
@@ -334,5 +336,5 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
 
   filter(b,a,in,out);
 
-}
+  } */
       

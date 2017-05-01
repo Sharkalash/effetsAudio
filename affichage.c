@@ -33,13 +33,14 @@ void libererPedale(Pedale p[])
     }
 }
 
-void set_etat(Pedale *p, ETAT etat)
+void set_color(Pedale *p, ETAT etat)
 {
   TTF_Font *police = NULL;
   SDL_Color rouge = {255,0,0}, vert = {0,255,0};
   
   police = TTF_OpenFont("Lato-Heavy.ttf",12);
 
+  //ON : VERT, OFF : ROUGE
   if(etat == OFF)
     p->texte = TTF_RenderText_Blended(police,p->nom,rouge);
   else
@@ -53,26 +54,107 @@ int get_pedale(int x, int y, Pedale pedalier[])
 {
   int i=0;
 
-  int xtmp = x - X_INIT;
+  int xtmp = x - X_INIT; //On enlève les coordonnées initiales
   int ytmp = y - Y_INIT;
 
-  if(xtmp<0 || ytmp<0)
+  if(xtmp<0 || ytmp<0) //Négatif : ce n'est pas une pédale
     return -1; // Ce n'est pas une pédale
   
-  x = x - xtmp%X_INTERVALLE;
+  x = x - xtmp%X_INTERVALLE; //Calcul des coordonnées d'une pédale
   y = y - ytmp%Y_INTERVALLE;
 
+  //On cherche si ces coordonnées correspondent à une pédale existante
   while((x!=pedalier[i].position.x || y!=pedalier[i].position.y) && ++i<NB_EFFETS);
 
   if(i>=NB_EFFETS)
-    return -1;
+    return -1; //Ce n'est pas une pédale
 
-  return i;  
+  return i;  //On renvoie le numéro de la pédale
 }
   
-  
+int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *data)
+{
+  TTF_Font *police = NULL;
+  SDL_Color blanc = {255,255,255};
+  int continuer = 1;
+  int e;
+  SDL_Event event;
 
-void pedalier(SDL_Surface *ecran,ETAT effets[])
+  police = TTF_OpenFont("Lato-Heavy.ttf",12);
+  pedalier[pedale].texte = TTF_RenderText_Blended(police,pedalier[pedale].nom,blanc);
+
+  TTF_CloseFont(police);
+
+  SDL_BlitSurface(pedalier[pedale].texte, NULL, ecran, &pedalier[pedale].position);
+  SDL_Flip(ecran);
+
+  SDL_EnableKeyRepeat(100,100); //Activation de la répétition des touches
+
+  while(continuer)
+    {
+      SDL_WaitEvent(&event);
+
+      switch(event.type)
+	{
+	case SDL_QUIT:
+	  return 0;
+	  break;
+	case SDL_MOUSEBUTTONDOWN:
+	  continuer = 0;
+	  break;
+	case SDL_KEYDOWN:
+	  switch (event.key.keysym.sym)
+	    {
+	    case SDLK_q:
+	    case SDLK_ESCAPE:
+	      continuer = 0;
+	      break;
+	    case SDLK_RIGHT:
+	    case SDLK_LEFT:
+	    case SDLK_UP:
+	    case SDLK_DOWN:
+	      e = event.key.keysym.sym;
+
+	      switch (pedale)
+		{
+		case WAH: 
+		  data->wah_fw += ((e==SDLK_RIGHT) - (e==SDLK_LEFT))*50;
+		  data->wah += ((e==SDLK_UP) - (e==SDLK_DOWN))*100;
+		  break;
+		case TREMOLO:
+		  data->tremolo_fc += (e==SDLK_RIGHT) - (e==SDLK_LEFT);
+		  data->tremolo_alpha += (float)((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
+		  break;
+		case FUZZ:
+		  data->fuzz_gain += (e==SDLK_RIGHT) - (e==SDLK_LEFT);
+		  data->fuzz_mix += (float)((e==SDLK_UP && data->fuzz_mix < 1) - (e==SDLK_DOWN && data->fuzz_mix > 0))/10.;
+		  break;
+		case OVERDRIVE:
+		  data->overdrive_drive += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->overdrive_drive > 0);
+		  break;
+		case FLANGER:
+		  data->flanger_amp += (float)((e==SDLK_RIGHT) - (e==SDLK_LEFT))/10.;
+		  break;
+		case CHORUS:
+		  data->chorus_gain += (float) ((e==SDLK_RIGHT) - (e==SDLK_LEFT))/10.;
+		  break;
+		case ECHO:
+		  data->echo_retard += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->echo_retard>50))*50;
+		  data->echo_gain += (float)((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
+		  break;
+		}
+	      
+	      break;
+	    }
+	}
+    }
+
+  SDL_EnableKeyRepeat(0,0); //Désactivation de la répétition des touches
+  set_color(pedalier+pedale, data->effets[pedale]);
+  return 1;
+}
+
+void pedalier(SDL_Surface *ecran,Data *data)
 {
   int continuer=1;
   SDL_Event event;
@@ -123,63 +205,62 @@ void pedalier(SDL_Surface *ecran,ETAT effets[])
 	  break;
 	case SDL_MOUSEBUTTONDOWN:
 	  pedale = get_pedale(event.button.x, event.button.y, pedalier);
+
+	  if(event.button.button == SDL_BUTTON_RIGHT)
+	    {
+	      continuer = selectionParametre(ecran,pedalier,pedale,data);
+	      pedale = -1;
+	    }
+	  
 	  break;
-	  /*case SDL_MOUSEMOTION:
-	  pedale = get_pedale(event.motion.x, event.motion.y, pedalier);
-	  break;*/
-	case SDL_KEYDOWN:
+	case SDL_KEYDOWN: //Sélection clavier
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_q:
 	    case SDLK_ESCAPE:
-	      continuer = 0;
+	      continuer = 0; //On quitte le programme
 	      break;
 	    case SDLK_w:
-	      //effets[0]=effets[0]==OFF?WAH:OFF;
-	      pedale=0;
+	      pedale = WAH;
 	      break;
 	    case SDLK_t:
-	      //effets[1]=effets[1]==OFF?TREMOLO:OFF;
-	      pedale=1;
+	      pedale = TREMOLO;
 	      break;
 	    case SDLK_f:
-	      //effets[2]=effets[2]==OFF?FUZZ:OFF;
-	      pedale=2;
+	      pedale = FUZZ;
 	      break;
 	    case SDLK_o:
-	      //effets[3]=effets[3]==OFF?OVERDRIVE:OFF;
-	      pedale=3;
+	      pedale = OVERDRIVE;
 	      break;
 	    case SDLK_g:
-	      //effets[4]=effets[4]==OFF?CHORUS:OFF;
-	      pedale=4;
+	      pedale = FLANGER;
 	      break;
 	    case SDLK_c:
-	      // effets[5]=effets[5]==OFF?FLANGER:OFF;
-	      pedale=5;
+	      pedale = CHORUS;
 	      break;
 	    case SDLK_e:
-	      //effets[6] = (effets[6] == OFF)? ECHO : OFF;
-	      pedale=6;
+	      pedale = ECHO;
 	      break;
 	    }
 	}
 
       if(pedale!=-1)
 	{
-	  effets[pedale] = (effets[pedale]==ON)?OFF:ON;
-	  set_etat(pedalier+pedale, effets[pedale]);
+	  data->effets[pedale] = (data->effets[pedale]==ON)?OFF:ON; //Activation ou désactivation de l'effet
+	  set_color(pedalier+pedale, data->effets[pedale]); //On met à jour la couleur de la pédale
 	}
 
-      SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,0,0,0));
+      SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,0,0,0)); //Fond de la fenetre
+      
+      //Collage de chaque pédale à l'écran
       for (i = 0; i < NB_EFFETS; i++) {
 	SDL_BlitSurface(pedalier[i].texte, NULL, ecran, &pedalier[i].position);
       }
       
-      SDL_Flip(ecran);
+      SDL_Flip(ecran); //Actualisation de l'écran
     }
 
-  libererPedale(pedalier);
+  libererPedale(pedalier); //On libère toutes les pédales
 }
       
 	

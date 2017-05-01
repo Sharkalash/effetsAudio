@@ -7,10 +7,10 @@ LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread -lSDL -lSDL_ttf #Bibliot
 
 ifeq ($(DEBUG), yes) #Condtions
 $(info "Mode debug")
-CFLAGS = -g -W -Wall -O2
+CFLAGS = -g -W -O2
 else
 $(info "Mode Release")
-CFLAGS = -W -Wall -O2
+CFLAGS = -W -O2
 endif
 
 

@@ -25,13 +25,31 @@ typedef struct Buffer{
 typedef struct Data{
   /* DATA tremolo */
   int trem;
+  float tremolo_fc;
+  float tremolo_alpha;
 
   /* DATA Wah */
   float wah;
   int monte;
+  float wah_fw;
 
   /* DATA flanger */
   int flange;
+  float flanger_amp;
+
+  /* DATA chorus */
+  float chorus_gain;
+
+  /* DATA echo */
+  float echo_gain;
+  float echo_retard;
+
+  /* DATA fuzz */
+  float fuzz_gain;
+  float fuzz_mix;
+
+  /* DATA overdrive */
+  int overdrive_drive;
 
   Buffer * listBuffer;
   ETAT effets[NB_EFFETS];

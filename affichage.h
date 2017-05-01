@@ -14,5 +14,5 @@ typedef struct Pedale
 }Pedale;
 
 
-void pedalier(SDL_Surface *ecran,ETAT effets[]);
+void pedalier(SDL_Surface *ecran,Data *data);
 #endif
