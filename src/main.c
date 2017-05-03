@@ -12,9 +12,9 @@
 #include <math.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-#include "prototypes.h"
-#include "audio.h"
-#include "affichage.h"
+#include "../header/prototypes.h"
+#include "../header/audio.h"
+#include "../header/affichage.h"
  
 Buffer * creerBuffer(){
   Buffer * listBuffer = malloc(sizeof(Buffer));

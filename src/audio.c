@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "prototypes.h"
-#include "audio.h"
+#include "../header/prototypes.h"
+#include "../header/audio.h"
 
 
 float maxTabAbs(float *tab)

@@ -1,16 +1,16 @@
 CC = gcc
 DEBUG = yes
 EXE = audioFX
-SRC = $(wildcard *.c)#Génération de la liste des fichiers sources
+SRC = $(wildcard src/*.c)#Génération de la liste des fichiers sources
 OBJ = $(SRC:.c=.o)#Génération de la liste des fichiers objets
-LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread #Bibliothèques
+LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread -lSDL -lSDL_ttf #Bibliothèques
 
 ifeq ($(DEBUG), yes) #Condtions
 $(info "Mode debug")
-CFLAGS = -g -W -Wall -O2
+CFLAGS = -g -W -O2
 else
 $(info "Mode Release")
-CFLAGS = -W -Wall -O2
+CFLAGS = -W -O2
 endif
 
 
@@ -21,11 +21,12 @@ $(EXE) : $(OBJ)
 
 %.o:%.c git
 	$(CC) -c $< $(CFLAGS)
-clean :
+cleanTmp :
 	rm -f *~* #Fichier temporaire d'emacs
 	rm -f *#*
-cleanO :
+clean : cleanTmp
 	rm -f *.o
+
 depend:
 	makedepend $(SRC)
 doc:
@@ -41,5 +42,4 @@ audio.o: /usr/include/wchar.h /usr/include/math.h prototypes.h audio.h
 main.o: /usr/include/stdio.h /usr/include/features.h
 main.o: /usr/include/stdc-predef.h /usr/include/libio.h
 main.o: /usr/include/_G_config.h /usr/include/wchar.h /usr/include/stdlib.h
-main.o: /usr/include/alloca.h /usr/include/portaudio.h /usr/include/math.h
-main.o: prototypes.h audio.h
+main.o: /usr/include/alloca.h /usr/include/math.h prototypes.h audio.h

@@ -3,8 +3,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <string.h>
-#include "prototypes.h"
-#include "affichage.h"
+#include "../header/prototypes.h"
+#include "..//header/affichage.h"
 
 
 void creerPedale(Pedale *p, char *nom, int x, int y){
