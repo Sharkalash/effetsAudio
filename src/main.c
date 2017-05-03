@@ -11,6 +11,7 @@
 #include <portaudio.h>
 #include <math.h>
 #include <SDL/SDL.h>
+#include <time.h>
 #include <SDL/SDL_ttf.h>
 #include "../header/prototypes.h"
 #include "../header/audio.h"
@@ -46,11 +47,14 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   Data * data = (Data *)userData;
   timeInfo = (void *)timeInfo;
   statusFlags = statusFlags;
-  
+  int i;
   float *out = (float*)outputBuffer; //Buffer de sortie
   float *in = (float*)inputBuffer; //Buffer d'entrée
   float *copy = (float *)malloc(sizeof(float)*2*framesPerBuffer); //On copie le buffer après chaque effet pour pouvoir les combiner 
 
+  for(i=0;i<FRAME_PER_BUFFER;i++)
+    in[2*i +1] = in[2*i]; //On copie pour avoir le stéréo, car le micro  est en mono
+  
   copie(in,out);
 
 
@@ -76,13 +80,13 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 
   if(data->effets[FLANGER]==ON){
     copie(out,copy);
-    flanger(copy,out,data->flanger_amp,data->listBuffer,&(data->flange));
+    flanger(copy,out,data->flanger_amp,data->listBuffer,data->flanger_max_time_delay, data->flanger_rate,&(data->flange));
   }
 
   if(data->effets[CHORUS] == ON)
     {
       copie(out,copy);
-      chorus(copy, out, data->chorus_gain, data->listBuffer);
+      chorus(copy, out, data->chorus_gain, data->listBuffer, &(data->choeur), &(data->chorus_retard), data->chorus_change);
     }
   
   if(data->effets[ECHO]==ON){
@@ -107,8 +111,12 @@ Data initData(){
   data.wah_fw = 3000;
   data.listBuffer = creerBuffer();
   data.flange = 0;
-  data.flanger_amp = 0.7;
+  data.flanger_amp = 0.5;
+  data.flanger_rate = 1;
+  data.flanger_max_time_delay = 0.003;
   data.chorus_gain = 0.5;
+  data.chorus_change = 8;
+  data.choeur = 0;
   data.echo_retard = 200;
   data.echo_gain = 0.5;
   data.fuzz_gain = 11;
@@ -134,6 +142,7 @@ int main()
 
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();
+  srand(time(NULL));
   
   ecran = SDL_SetVideoMode(LARGEUR,HAUTEUR, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   
@@ -156,7 +165,6 @@ int main()
   }
 
   if((err=Pa_StartStream(stream))!=paNoError) goto error;
-  // char c = 0;
   
   pedalier(ecran,&data);
 

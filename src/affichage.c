@@ -119,7 +119,6 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		{
 		case WAH: 
 		  data->wah_fw += ((e==SDLK_RIGHT) - (e==SDLK_LEFT))*50;
-		  data->wah += ((e==SDLK_UP) - (e==SDLK_DOWN))*100;
 		  break;
 		case TREMOLO:
 		  data->tremolo_fc += (e==SDLK_RIGHT) - (e==SDLK_LEFT);
@@ -133,10 +132,12 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		  data->overdrive_drive += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->overdrive_drive > 0);
 		  break;
 		case FLANGER:
-		  data->flanger_amp += (float)((e==SDLK_RIGHT) - (e==SDLK_LEFT))/10.;
+		  data->flanger_rate += (float)((e==SDLK_UP) - (e==SDLK_DOWN && data->flanger_rate > 0))/10.;
+		  data->flanger_max_time_delay +=  (float)((e==SDLK_RIGHT && data->flanger_max_time_delay < 0.015) - (e==SDLK_LEFT && data->flanger_max_time_delay > 0.003))/1000.;
 		  break;
 		case CHORUS:
-		  data->chorus_gain += (float) ((e==SDLK_RIGHT) - (e==SDLK_LEFT))/10.;
+		  data->chorus_gain += (float) ((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
+		  data->chorus_change += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->chorus_change > 1);
 		  break;
 		case ECHO:
 		  data->echo_retard += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->echo_retard>50))*50;

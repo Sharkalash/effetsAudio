@@ -88,7 +88,7 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer);
  *\param flange Pour éviter de revenir au début de la sinusoide à chaque nouveau buffer
  */
 
-void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange);
+void flanger(float *in, float* out,float amp, Buffer *listBuffer,float max_time_delay,float rate, int *flange);
 
 /**
  *\fn void chorus (float *in, float *out, float gain, Buffer *listBuffer)
@@ -99,6 +99,6 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange);
  *\param listBuffer La liste des buffer en mémoire
  */
 
-void chorus (float *in, float *out, float gain, Buffer *listBuffer);
+void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur, int *retard, int change);
 #endif 
 

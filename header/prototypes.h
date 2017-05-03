@@ -36,9 +36,14 @@ typedef struct Data{
   /* DATA flanger */
   int flange;
   float flanger_amp;
+  float flanger_rate;
+  float flanger_max_time_delay;
 
   /* DATA chorus */
   float chorus_gain;
+  int choeur;
+  int chorus_retard;
+  int chorus_change;
 
   /* DATA echo */
   float echo_gain;

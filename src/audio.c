@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "../header/prototypes.h"
 #include "../header/audio.h"
 
@@ -84,23 +85,20 @@ void overdrive(float *in, float *out, int drive)
 
 }
 
-/*float wah = 500;
-  int monte = 1;*/
 
 void wahwah(float *in, float *out,int fw, float *wah, int * monte)
 {
-  float *outH = malloc(sizeof(float)*2*FRAME_PER_BUFFER),*outL = malloc(sizeof(float)*2*FRAME_PER_BUFFER), *fc = malloc(sizeof(float)*2*FRAME_PER_BUFFER); //Highpass et Lowpass
+  float *outH = malloc(sizeof(float)*FRAME_PER_BUFFER),*outL = malloc(sizeof(float)*FRAME_PER_BUFFER), *fc = malloc(sizeof(float)*FRAME_PER_BUFFER); //Highpass et Lowpass
   int i=0;
   float damp = 0.05,f1,q1;
   int maxf=3000, minf = 500;
 
   float delta = fw/(float)(SAMPLE_RATE);
  
-  while(i<2*FRAME_PER_BUFFER)
+  while(i<FRAME_PER_BUFFER)
     {
       
-      while(i<2*FRAME_PER_BUFFER && (*wah)<=maxf && *monte){
-	//printf("%f\n", (*wah));
+      while(i<FRAME_PER_BUFFER && (*wah)<=maxf && *monte){
 	fc[i++] = (*wah);
 	(*wah)+=delta;
       }
@@ -108,7 +106,7 @@ void wahwah(float *in, float *out,int fw, float *wah, int * monte)
       if(*wah>maxf)
 	*monte = !(*monte);
       
-      while(i<2*FRAME_PER_BUFFER && *wah>=minf && !(*monte)){
+      while(i<FRAME_PER_BUFFER && *wah>=minf && !(*monte)){
 	fc[i++] = (*wah);
 	(*wah)-=delta;
       }
@@ -123,27 +121,29 @@ void wahwah(float *in, float *out,int fw, float *wah, int * monte)
   q1 = 2*damp;
 
   outH[0] = in[0];
-  out[0] = f1*outH[0];
+  out[1] = out[0] = f1*outH[0];
   outL[0] = f1*out[0];
 
-  for(i=1;i<2*FRAME_PER_BUFFER;i++)
+  for(i=1;i<FRAME_PER_BUFFER;i++)
     {
-      outH[i] = in[i] - outL[i-1] - q1*out[i-1];
-      out[i] = f1*outH[i] + out[i-1];
-      outL[i] = f1*out[i] + outL[i-1];
+      outH[i] = in[2*i] - outL[i-1] - q1*out[i-1];
+      out[2*i] = f1*outH[i] + out[2*i-2];
+      out[2*i+1] = out[2*i];
+      outL[i] = f1*out[2*i] + outL[i-1];
       f1 = 2*sin((PI*fc[i])/SAMPLE_RATE);
     }
 }
 
-//int trem = 0;
-//const int tremMax = 8192;
 
 void tremolo(float *in, float *out, float alpha, float fc, int *trem)
 {
   int i;
 
-  for(i=0;i<2*FRAME_PER_BUFFER;i++)
-    out[i] = in[i] * (1 + (alpha*sin(2*PI*((*trem)++)*(fc/(float)(SAMPLE_RATE)))));
+  for(i=0;i<FRAME_PER_BUFFER;i++)
+    {
+      out[2*i] = in[2*i] * (1 + (alpha*sin(2*PI*((*trem)++)*(fc/(float)(SAMPLE_RATE)))));
+      out[2*i + 1] = out[2*i];
+    }
 
   (*trem)%=8192;
 }
@@ -175,28 +175,25 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
   }
 }
 
-void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange)
+void flanger(float *in, float* out,float amp, Buffer *listBuffer,float max_time_delay,float rate, int *flange)
 {
-  float max_time_delay=0.003;
-  int rate = 1; //Pourcentage de flange en Hz
   unsigned int i;
   int max_sample_delay = round(max_time_delay*SAMPLE_RATE);
  
 
   for(i=0;i<FRAME_PER_BUFFER;i++){
-    int delay =  ceil(fabs(sin(2*PI*((*flange)++)*((float)(rate)/(float)(SAMPLE_RATE)))*max_sample_delay));
-
-    (*flange)%=8192; //Pour eviter un trop grand nombre
+    int delay =  ceil(fabs(sin(2*PI*((*flange)++)*(rate/(float)(SAMPLE_RATE)))*max_sample_delay));
     
     int r = i-delay;
 
     if(r>=0){
       out[2*i] = amp*(in[2*i] + in[2*r]);
       out[2*i+1] = amp*(in[2*i+1] + in[2*r+1]);
+      //out[2*i + 1] = out[2*i];
     }
     else{
       r=-r;
-      int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
+      int numBuffer = listBuffer->dernier - (int)(r/(FRAME_PER_BUFFER));
       
       if(numBuffer<0)
 	numBuffer += TMAX-1;
@@ -204,25 +201,35 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer, int *flange)
       int ind = r%(FRAME_PER_BUFFER);
       out[2*i] = amp*(in[2*i] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -2]);
       out[2*i+1] = amp*(in[2*i+1] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -1]);
+      //out[2*i+1] = out[2*i];
       
     }
   }
+
+  (*flange)%=8192; //Pour eviter un trop grand nombre
   
 }
 
 
-void chorus (float *in, float *out, float gain, Buffer *listBuffer)
+void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur, int *retard, int change)
 {
   const int MIN = 10, MAX = 25;
   int delayLine, i;
-  float retard;
 
-  retard = (rand() % (MAX - MIN + 1)) + MIN;
+  delayLine = (int) (*retard * SAMPLE_RATE / 1000);
   
   for (i = 0 ; i < FRAME_PER_BUFFER ; i++)
     {
+      if ((*choeur) % (SAMPLE_RATE / change) == 0)
+	{
+	  *retard = (rand() % (MAX - MIN + 1)) + MIN;
+	  (*choeur) = 0;
+	  delayLine = (int) (*retard * SAMPLE_RATE / 1000);
+	}
+
+      (*choeur)++;
       
-      delayLine = (int) retard * SAMPLE_RATE / 1000;
+      
       int r = i - delayLine;
       if ( r >= 0)
 	{
@@ -239,11 +246,13 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer)
 	    }
  
 	  int ind = r % (FRAME_PER_BUFFER);
-	  out[2*i] = in[2*i] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 1 - 2*ind];
-	  out[2*i+1] = in[2*i+1] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 1 - 2*ind - 1];
+	  out[2*i] = in[2*i] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 2 - 2*ind];
+	  out[2*i+1] = in[2*i+1] + gain * listBuffer->buffer[numBuffer][2 * FRAME_PER_BUFFER - 2*ind - 1];
 	  
 	}
     }
+
+  //fprintf(stderr,"%d\n", *choeur);
 }
 
 /*
