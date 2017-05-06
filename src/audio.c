@@ -251,34 +251,67 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur,
 	  
 	}
     }
-
-  //fprintf(stderr,"%d\n", *choeur);
 }
 
-/*
 
-void filter(float *a, float *b, float *in, float *out)
+void filter(float *b, float *a,int nb, int na,float *in, float *out)
 {
-  int i;
+  int i,j;
+
+  if(a[0] == 0)
+    {
+      fprintf(stderr,"Erreur : division par zéro");
+      return;
+    }
+
+  /* Normalisation par a[0] */
+  
+  for (i = 0; i < nb; i++) {
+    b[i]/=a[0];
+  }
+
+  for (i = 0; i < na; i++) {
+    a[i]/=a[0];
+  }
+
+  /*Filtrage*/
 
   for(i=0;i<FRAME_PER_BUFFER;i++)
     {
+      float y=0;
+      j = 0;
+
+      while(j<nb && j<=i)
+	{
+	  y += b[j]*in[2*(i-j)];
+	  j++;
+	}
+
+      j=1;
+
+      while(j<na && j<=i)
+	{
+	  y -= a[j]*out[2*(i-j)];
+	  j++;
+	}
+
+      out[2*i + 1] = out[2*i] = y;
     }
       
 }
 
-void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
+void shelving(float *in, float *out, float gain, float fc, EQ type)
 {
-  float k = tan((PI*fc)/SAMPLE_RATE);
-  float v0 = powf(10,gain/20);
-  float r = 1/Q;
+  float k = tan((PI*fc)/(float)SAMPLE_RATE);
+  float v0 = powf(10,gain/20.);
+  float r = sqrt(2);
   float a[3], b[3];
 
   //On inverse le gain si c'est un cut
   if(v0 < 1)
     v0 = 1/v0;
 
-  /* BASS BOOST */ /*
+  /* BASS BOOST */
 
   if(gain > 0 &&  type == BASS)
     {
@@ -291,7 +324,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r*k + powf(k,2)) / div;
     }
   
-  /* BASS CUT */ /*
+  /* BASS CUT */
   
   else if (gain < 0 && type == BASS)
     {
@@ -304,13 +337,13 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r*k*sqrt(v0) + v0*powf(k,2)) / div;
     }
 
-  /* TREBLE BOOST*/ /*
+  /* TREBLE BOOST*/
 
   else if(gain > 0 && type == TREBLE)
     {
-      float div = (1 + r*k + powf(k,2));
+      float div = (1 + r*k + pow(k,2));
 
-      b[0] = (V0 + sqrt(v0)*r*k + powf(k,2)) / div;
+      b[0] = (v0 + sqrt(v0)*r*k + powf(k,2)) / div;
       b[1] = (2*(powf(k,2) - v0)) / div;
       b[2] = (v0 - sqrt(v0)*r*k + powf(k,2)) / div;
       a[1] = (2*(powf(k,2) - 1)) / div;
@@ -318,7 +351,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
 
     }
 
-  /* TREBLE CUT */ /*
+  /* TREBLE CUT */
 
   else if(gain < 0 && type == TREBLE)
     {
@@ -334,7 +367,7 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
       a[2] = (1 - r/sqrt(v0)*k + powf(k,2)/v0) / div;
     }
 
-  /* ALL-PASS */ /*
+  /* ALL-PASS */
 
   else {
     b[0] = v0;
@@ -343,9 +376,9 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
 
   a[0] = 1;
 
-  filter(b,a,in,out);
+  filter(b,a,3,3,in,out);
 
-  } */
+  }
       
 void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
 {

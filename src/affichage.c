@@ -113,12 +113,15 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 	    case SDLK_LEFT:
 	    case SDLK_UP:
 	    case SDLK_DOWN:
+	    case SDLK_a:
+	    case SDLK_b:
+	    case SDLK_t:
 	      e = event.key.keysym.sym;
 
 	      switch (pedale)
 		{
 		case WAH: 
-		  data->wah_fw += ((e==SDLK_RIGHT) - (e==SDLK_LEFT))*50;
+		  data->wah_fw += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->wah_fw > 0))*50;
 		  break;
 		case TREMOLO:
 		  data->tremolo_fc += (e==SDLK_RIGHT) - (e==SDLK_LEFT);
@@ -131,6 +134,23 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		case OVERDRIVE:
 		  data->overdrive_drive += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->overdrive_drive > 0);
 		  break;
+		case SHELVING:
+		  data->shelving_gain += (float) ((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
+		  data->shelving_fc += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->shelving_fc>0))*50;
+
+		  switch(e)
+		    {
+		    case SDLK_t:
+		      data->shelving_type = TREBLE;
+		      break;
+		    case SDLK_b:
+		      data->shelving_type = BASS;
+		      break;
+		    case SDLK_a:
+		      data->shelving_type = ALL;
+		      break;
+		    }
+		  
 		case VIBRATO:
 		  data->vibrato_modfreq += (e==SDLK_UP) - (e==SDLK_DOWN && data->vibrato_modfreq > 0);
 		  data->vibrato_width += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->vibrato_width > 0))*10;		    
@@ -181,6 +201,11 @@ void pedalier(SDL_Surface *ecran,Data *data)
   y+=Y_INTERVALLE;
   
   creerPedale(pedalier+OVERDRIVE,"OVERDRIVE",x,y);
+
+  x+=X_INTERVALLE;
+  y=Y_INIT;
+
+  creerPedale(pedalier+SHELVING,"SHELVING",x,y);
   
   x+=X_INTERVALLE;
   y=Y_INIT;
@@ -214,7 +239,7 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	case SDL_MOUSEBUTTONDOWN:
 	  pedale = get_pedale(event.button.x, event.button.y, pedalier);
 
-	  if(event.button.button == SDL_BUTTON_RIGHT)
+	  if(event.button.button == SDL_BUTTON_RIGHT && pedale != -1)
 	    {
 	      continuer = selectionParametre(ecran,pedalier,pedale,data);
 	      pedale = -1;
@@ -239,6 +264,9 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	      break;
 	    case SDLK_o:
 	      pedale = OVERDRIVE;
+	      break;
+	    case SDLK_s:
+	      pedale = SHELVING;
 	      break;
 	    case SDLK_v:
 	      pedale = VIBRATO;

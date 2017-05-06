@@ -102,5 +102,7 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer,float max_time_
 void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur, int *retard, int change);
 
 void vibrato(float *in, float *out, float modfreq, float width, int *vibre);
+
+void shelving(float *in, float *out, float gain, float fc,EQ type);
 #endif 
 

@@ -4,14 +4,14 @@
 #define SAMPLE_RATE 44100
 #define FRAME_PER_BUFFER 256
 #define PA_SAMPLE_TYPE paFloat32
-#define NB_EFFETS 8
+#define NB_EFFETS 9
 #define TMAX 200
 #define HAUTEUR 480
 #define LARGEUR 640
 
 #define TAILLE_BUFFER TMAX*2*FRAME_PER_BUFFER
 
-typedef enum FX {WAH,TREMOLO,FUZZ,OVERDRIVE,VIBRATO,FLANGER,CHORUS,ECHO}FX;
+typedef enum FX {WAH,TREMOLO,FUZZ,OVERDRIVE,SHELVING,VIBRATO,FLANGER,CHORUS,ECHO}FX;
 typedef enum ETAT{ON,OFF}ETAT;
 typedef enum EQ{BASS,TREBLE,ALL}EQ;
 
@@ -56,10 +56,16 @@ typedef struct Data{
   /* DATA overdrive */
   int overdrive_drive;
 
-  /*DATA vibrato */
+  /* DATA vibrato */
   float vibrato_modfreq;
   float vibrato_width;
   int vibre;
+
+  /* DATA shelving */
+  float shelving_gain;
+  float shelving_fc;
+  float shelving_Q;
+  EQ shelving_type;
   
 
   Buffer * listBuffer;

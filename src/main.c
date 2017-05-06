@@ -78,6 +78,11 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     overdrive(copy,out,data->overdrive_drive);
   }
 
+  if(data->effets[SHELVING]==ON){
+    copie(out,copy);
+    shelving(copy,out,data->shelving_gain,data->shelving_fc, data->shelving_type);
+  }
+
   if(data->effets[VIBRATO]==ON){
     copie(out,copy);
     vibrato(copy,out,data->vibrato_modfreq,data->vibrato_width, &data->vibre);
@@ -130,6 +135,9 @@ Data initData(){
   data.vibrato_modfreq = 5;
   data.vibrato_width = 200;
   data.vibre = 0;
+  data.shelving_gain = 4;
+  data.shelving_fc = 300;
+  data.shelving_type = BASS;
 
   /* Initilisation des effets à OFF */
   
