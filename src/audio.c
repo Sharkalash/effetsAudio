@@ -347,3 +347,48 @@ void shelving(float *in, float *out, float gain, float fc, float Q, EQ type)
 
   } */
       
+void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
+{
+  //int ya_alt = 0;
+  width/=1000;
+  int delay = round(width*SAMPLE_RATE); //Delai en échatillons
+  float *delayLine;
+  int i,j;
+
+  //width = round(width*SAMPLE_RATE); //Largeur de la modulation en echantillons
+  
+  if(width > delay)
+    {
+      fprintf(stderr, "Erreur : delai supérieur au délai maximum");
+      return;
+      }
+
+  modfreq /= (float)SAMPLE_RATE; //Frequence de modulation en échantillons
+
+  int l = 2+delay+ width*2; //Taille du délai
+  delayLine = malloc(sizeof(float)*l);
+
+  for (i = 0; i < FRAME_PER_BUFFER; i++) {
+    float zeiger = sin(2*PI*(*vibre)*modfreq)*width + delay + 1;
+    (*vibre)++;
+    int r = floor(zeiger);
+    float frac = zeiger - r;
+
+    
+
+    for(j=l-2;j>=1;j--)
+      delayLine[j] = delayLine[j-1];
+
+    delayLine[0] = in[2*i];
+
+    out[2*i + 1] = out[2*i] = delayLine[r+1]*frac + delayLine[r]*(1-frac); //Interpolation linéaire
+
+    
+    
+  }
+
+  (*vibre)%=8192;
+  free(delayLine);
+
+}
+  

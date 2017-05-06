@@ -78,6 +78,11 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     overdrive(copy,out,data->overdrive_drive);
   }
 
+  if(data->effets[VIBRATO]==ON){
+    copie(out,copy);
+    vibrato(copy,out,data->vibrato_modfreq,data->vibrato_width, &data->vibre);
+  }
+
   if(data->effets[FLANGER]==ON){
     copie(out,copy);
     flanger(copy,out,data->flanger_amp,data->listBuffer,data->flanger_max_time_delay, data->flanger_rate,&(data->flange));
@@ -122,6 +127,9 @@ Data initData(){
   data.fuzz_gain = 11;
   data.fuzz_mix = 0.5;
   data.overdrive_drive = 5;
+  data.vibrato_modfreq = 5;
+  data.vibrato_width = 200;
+  data.vibre = 0;
 
   /* Initilisation des effets à OFF */
   

@@ -131,6 +131,9 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		case OVERDRIVE:
 		  data->overdrive_drive += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->overdrive_drive > 0);
 		  break;
+		case VIBRATO:
+		  data->vibrato_modfreq += (e==SDLK_UP) - (e==SDLK_DOWN && data->vibrato_modfreq > 0);
+		  data->vibrato_width += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->vibrato_width > 0))*10;		    
 		case FLANGER:
 		  data->flanger_rate += (float)((e==SDLK_UP) - (e==SDLK_DOWN && data->flanger_rate > 0))/10.;
 		  data->flanger_max_time_delay +=  (float)((e==SDLK_RIGHT && data->flanger_max_time_delay < 0.015) - (e==SDLK_LEFT && data->flanger_max_time_delay > 0.003))/1000.;
@@ -181,6 +184,10 @@ void pedalier(SDL_Surface *ecran,Data *data)
   
   x+=X_INTERVALLE;
   y=Y_INIT;
+
+  creerPedale(pedalier+VIBRATO,"VIBRATO",x,y);
+
+  y+=Y_INTERVALLE;
   
   creerPedale(pedalier+FLANGER,"FLANGER",x,y);
   
@@ -232,6 +239,9 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	      break;
 	    case SDLK_o:
 	      pedale = OVERDRIVE;
+	      break;
+	    case SDLK_v:
+	      pedale = VIBRATO;
 	      break;
 	    case SDLK_g:
 	      pedale = FLANGER;
