@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Documentation effet audio: Référence du fichier main.c</title>
+<title>Documentation effet audio: Référence du fichier src/main.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,6 +78,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -94,34 +98,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <code>#include &lt;portaudio.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;SDL/SDL.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;SDL/SDL_ttf.h&gt;</code><br />
-<code>#include &quot;prototypes.h&quot;</code><br />
-<code>#include &quot;audio.h&quot;</code><br />
-<code>#include &quot;affichage.h&quot;</code><br />
+<code>#include &quot;../header/prototypes.h&quot;</code><br />
+<code>#include &quot;../header/audio.h&quot;</code><br />
+<code>#include &quot;../header/affichage.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Graphe des dépendances par inclusion de main.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8c__incl.png" border="0" usemap="#main_8c" alt=""/></div>
-<map name="main_8c" id="main_8c">
-<area shape="rect" id="node8" href="prototypes_8h_source.html" title="prototypes.h" alt="" coords="622,80,717,107"/>
-<area shape="rect" id="node9" href="audio_8h_source.html" title="audio.h" alt="" coords="741,80,805,107"/>
-<area shape="rect" id="node10" href="affichage_8h_source.html" title="affichage.h" alt="" coords="830,80,917,107"/>
+<div class="center"><img src="main_8c__incl.png" border="0" usemap="#src_2main_8c" alt=""/></div>
+<map name="src_2main_8c" id="src_2main_8c">
+<area shape="rect" id="node9" href="prototypes_8h_source.html" title="../header/prototypes.h" alt="" coords="707,80,856,107"/>
+<area shape="rect" id="node10" href="audio_8h_source.html" title="../header/audio.h" alt="" coords="879,80,998,107"/>
+<area shape="rect" id="node11" href="affichage_8h_source.html" title="../header/affichage.h" alt="" coords="1021,80,1163,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:aeac6a57809803dc95d2c2a55bde0611f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeac6a57809803dc95d2c2a55bde0611f"></a>
-<a class="el" href="structBuffer.html">Buffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>creerBuffer</b> ()</td></tr>
+<tr class="memitem:aeac6a57809803dc95d2c2a55bde0611f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aeac6a57809803dc95d2c2a55bde0611f">creerBuffer</a> ()</td></tr>
+<tr class="memdesc:aeac6a57809803dc95d2c2a55bde0611f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creer et initialise une file de buffer afin de les mémoriser.  <a href="#aeac6a57809803dc95d2c2a55bde0611f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aeac6a57809803dc95d2c2a55bde0611f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30349e8abf179e11939304443da230fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30349e8abf179e11939304443da230fe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>push</b> (<a class="el" href="structBuffer.html">Buffer</a> *listBuffer, float *in)</td></tr>
+<tr class="memitem:a30349e8abf179e11939304443da230fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a30349e8abf179e11939304443da230fe">push</a> (<a class="el" href="structBuffer.html">Buffer</a> *listBuffer, float *in)</td></tr>
+<tr class="memdesc:a30349e8abf179e11939304443da230fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enfile un buffer.  <a href="#a30349e8abf179e11939304443da230fe">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a30349e8abf179e11939304443da230fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6934d2030dc10fb92693b66ad5f4891f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6934d2030dc10fb92693b66ad5f4891f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>libererBuffer</b> (<a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
+<tr class="memitem:a6934d2030dc10fb92693b66ad5f4891f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6934d2030dc10fb92693b66ad5f4891f">libererBuffer</a> (<a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
+<tr class="memdesc:a6934d2030dc10fb92693b66ad5f4891f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la file des buffer.  <a href="#a6934d2030dc10fb92693b66ad5f4891f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a6934d2030dc10fb92693b66ad5f4891f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55559823eed9a8f3c87934a44b1d766d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55559823eed9a8f3c87934a44b1d766d"></a>
-<a class="el" href="structData.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><b>initData</b> ()</td></tr>
+<tr class="memitem:a55559823eed9a8f3c87934a44b1d766d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structData.html">Data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a55559823eed9a8f3c87934a44b1d766d">initData</a> ()</td></tr>
+<tr class="memdesc:a55559823eed9a8f3c87934a44b1d766d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise toutes les données des effets.  <a href="#a55559823eed9a8f3c87934a44b1d766d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a55559823eed9a8f3c87934a44b1d766d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
@@ -132,7 +137,103 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
 <p>L'objectif est de reproduire les effets audios souvent utilisés dans la musique. </p><dl class="section author"><dt>Auteur</dt><dd>David BALDASSIN </dd>
 <dd>
 Sylvain BOURGEA </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="aeac6a57809803dc95d2c2a55bde0611f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBuffer.html">Buffer</a>* creerBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creer et initialise une file de buffer afin de les mémoriser. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>La file de buffer. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a55559823eed9a8f3c87934a44b1d766d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structData.html">Data</a> initData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise toutes les données des effets. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>La structure avec toutes les données initialisées </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6934d2030dc10fb92693b66ad5f4891f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libererBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
+          <td class="paramname"><em>listBuffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la file des buffer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listBuffer</td><td>La file des buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a30349e8abf179e11939304443da230fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void push </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
+          <td class="paramname"><em>listBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enfile un buffer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listBuffer</td><td>La file des buffers </td></tr>
+    <tr><td class="paramname">in</td><td>Le buffer à ajouter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">

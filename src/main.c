@@ -1,7 +1,7 @@
 /**
  *\file main.c
  *\brief Projet effet audio - Fichier principal
- *\brief L'objectif est de reproduire les effets audios souvent utilisés dans la musique.
+ *\brief L'objectif est de reproduire les effets audio souvent utilisés dans la musique.
  *\author David BALDASSIN
  *\author Sylvain BOURGEA
  */ 
@@ -55,6 +55,7 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
   for(i=0;i<FRAME_PER_BUFFER;i++)
     in[2*i +1] = in[2*i]; //On copie pour avoir le stéréo, car le micro  est en mono
   
+  
   copie(in,out);
 
 
@@ -103,6 +104,11 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
     copie(out,copy);
     echo(copy,out,data->echo_gain,data->echo_retard,data->listBuffer);
   }
+
+  if(data->effets[REVERB]==ON){
+    copie(out,copy);
+    reverb(copy,out,data->reverb_nbAllpass,data->reverb_gainAllpass,data->reverb_gain);
+  }
   
   push(data->listBuffer,out);
   free(copy);
@@ -112,6 +118,8 @@ static int audioFXCallback(const void *inputBuffer, void *outputBuffer, unsigned
 Data initData(){
   Data data;
   int i;
+
+  /*Initialisation des données */
   
   data.trem = 0;
   data.tremolo_fc = 5;
@@ -131,13 +139,16 @@ Data initData(){
   data.echo_gain = 0.5;
   data.fuzz_gain = 11;
   data.fuzz_mix = 0.5;
-  data.overdrive_drive = 5;
+  data.overdrive_drive = 3;
   data.vibrato_modfreq = 5;
   data.vibrato_width = 200;
   data.vibre = 0;
   data.shelving_gain = 4;
   data.shelving_fc = 300;
   data.shelving_type = BASS;
+  data.reverb_nbAllpass = 6;
+  data.reverb_gainAllpass = 1;
+  data.reverb_gain = 0.2;
 
   /* Initilisation des effets à OFF */
   
@@ -153,8 +164,6 @@ int main()
   PaStream *stream;
   PaError err;
   Data data = initData(); //Initialisation des données
-
-  creerBuffer();
 
   SDL_Init(SDL_INIT_VIDEO);
   TTF_Init();

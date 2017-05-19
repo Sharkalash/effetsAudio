@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tremolo',['tremolo',['../audio_8c.html#a5c20ec4b8b7d35d17d75978ea0849ce5',1,'audio.c']]]
+  ['libererbuffer',['libererBuffer',['../main_8c.html#a6934d2030dc10fb92693b66ad5f4891f',1,'main.c']]],
+  ['libererpedale',['libererPedale',['../affichage_8c.html#a3697892ed958cb36e957f7cda66d5a41',1,'affichage.c']]]
 ];

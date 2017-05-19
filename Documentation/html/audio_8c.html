@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Documentation effet audio: Référence du fichier audio.c</title>
+<title>Documentation effet audio: Référence du fichier src/audio.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,6 +78,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -92,23 +96,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
-<code>#include &quot;prototypes.h&quot;</code><br />
-<code>#include &quot;audio.h&quot;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;../header/prototypes.h&quot;</code><br />
+<code>#include &quot;../header/audio.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Graphe des dépendances par inclusion de audio.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="audio_8c__incl.png" border="0" usemap="#audio_8c" alt=""/></div>
-<map name="audio_8c" id="audio_8c">
-<area shape="rect" id="node5" href="prototypes_8h_source.html" title="prototypes.h" alt="" coords="266,80,361,107"/>
-<area shape="rect" id="node6" href="audio_8h_source.html" title="audio.h" alt="" coords="385,80,449,107"/>
+<div class="center"><img src="audio_8c__incl.png" border="0" usemap="#src_2audio_8c" alt=""/></div>
+<map name="src_2audio_8c" id="src_2audio_8c">
+<area shape="rect" id="node6" href="prototypes_8h_source.html" title="../header/prototypes.h" alt="" coords="349,80,499,107"/>
+<area shape="rect" id="node7" href="audio_8h_source.html" title="../header/audio.h" alt="" coords="522,80,641,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a7274a1d53b113acf107471994fdb5039"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a7274a1d53b113acf107471994fdb5039">maxTabAbs</a> (float *tab)</td></tr>
-<tr class="memdesc:a7274a1d53b113acf107471994fdb5039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum d'un tableau en valeur absolu.  <a href="#a7274a1d53b113acf107471994fdb5039">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a7274a1d53b113acf107471994fdb5039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a3e7867b1e230dc6f63c5d6572379fee2">copie</a> (float *src, float *dest)</td></tr>
 <tr class="memdesc:a3e7867b1e230dc6f63c5d6572379fee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copie un tableau dans un autre.  <a href="#a3e7867b1e230dc6f63c5d6572379fee2">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,23 +129,26 @@ Fonctions</h2></td></tr>
 <tr class="memitem:aa5af6c6e5968aca623175887be170409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#aa5af6c6e5968aca623175887be170409">echo</a> (float *in, float *out, float gain, float retard, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
 <tr class="memdesc:aa5af6c6e5968aca623175887be170409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet echo au signal.  <a href="#aa5af6c6e5968aca623175887be170409">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aa5af6c6e5968aca623175887be170409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18517ad44351215d07eea5c790380b96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a18517ad44351215d07eea5c790380b96">flanger</a> (float *in, float *out, float amp, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer, int *flange)</td></tr>
-<tr class="memdesc:a18517ad44351215d07eea5c790380b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet flanger au signal.  <a href="#a18517ad44351215d07eea5c790380b96">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a18517ad44351215d07eea5c790380b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8ead572276ff8badba53fee211b87f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#aa8ead572276ff8badba53fee211b87f7">chorus</a> (float *in, float *out, float gain, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer)</td></tr>
-<tr class="memdesc:aa8ead572276ff8badba53fee211b87f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet chorus au signal.  <a href="#aa8ead572276ff8badba53fee211b87f7">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aa8ead572276ff8badba53fee211b87f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf97b3846ac7e120ad9b08b41c8f9e38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf97b3846ac7e120ad9b08b41c8f9e38"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b> (float *a, float *b, float *in, float *out)</td></tr>
-<tr class="separator:acf97b3846ac7e120ad9b08b41c8f9e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a805e50812ba33cd26bc028cddaffca9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a805e50812ba33cd26bc028cddaffca9c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *in, float *out, float gain, float fc, float Q, EQ type)</td></tr>
-<tr class="separator:a805e50812ba33cd26bc028cddaffca9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8fefad8f9c1a3ac0429ce6bdfa5772"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a1e8fefad8f9c1a3ac0429ce6bdfa5772">flanger</a> (float *in, float *out, float amp, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer, float max_time_delay, float rate, int *flange)</td></tr>
+<tr class="memdesc:a1e8fefad8f9c1a3ac0429ce6bdfa5772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet flanger au signal.  <a href="#a1e8fefad8f9c1a3ac0429ce6bdfa5772">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1e8fefad8f9c1a3ac0429ce6bdfa5772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a05bafc2202fcd24b204620624ffd82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a9a05bafc2202fcd24b204620624ffd82">chorus</a> (float *in, float *out, float gain, <a class="el" href="structBuffer.html">Buffer</a> *listBuffer, int *choeur, int *retard, int change)</td></tr>
+<tr class="memdesc:a9a05bafc2202fcd24b204620624ffd82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet chorus au signal.  <a href="#a9a05bafc2202fcd24b204620624ffd82">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9a05bafc2202fcd24b204620624ffd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a731dfba06c905935b44269f7a4bbfbed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a731dfba06c905935b44269f7a4bbfbed">filter</a> (float *b, float *a, int nb, int na, float *in, float *out)</td></tr>
+<tr class="memdesc:a731dfba06c905935b44269f7a4bbfbed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectue un filtrage linéaire selon une fonction de transfert rationelle.  <a href="#a731dfba06c905935b44269f7a4bbfbed">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a731dfba06c905935b44269f7a4bbfbed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04331f5e0a564fb1723cc3def0990de0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a04331f5e0a564fb1723cc3def0990de0">shelving</a> (float *in, float *out, float gain, float fc, EQ type)</td></tr>
+<tr class="memdesc:a04331f5e0a564fb1723cc3def0990de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un filtre shelving au signal.  <a href="#a04331f5e0a564fb1723cc3def0990de0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a04331f5e0a564fb1723cc3def0990de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cd0027e1c74860543a0a0375e85c9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a04cd0027e1c74860543a0a0375e85c9a">vibrato</a> (float *in, float *out, float modfreq, float width, int *vibre)</td></tr>
+<tr class="memdesc:a04cd0027e1c74860543a0a0375e85c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet vibrato au signal.  <a href="#a04cd0027e1c74860543a0a0375e85c9a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a04cd0027e1c74860543a0a0375e85c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Fichier gérant l'implémentation des effets. </p>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a class="anchor" id="aa8ead572276ff8badba53fee211b87f7"></a>
+<a class="anchor" id="a9a05bafc2202fcd24b204620624ffd82"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -169,7 +174,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structBuffer.html">Buffer</a> *&#160;</td>
-          <td class="paramname"><em>listBuffer</em>&#160;</td>
+          <td class="paramname"><em>listBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>choeur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>retard</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>change</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -186,6 +209,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
     <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
     <tr><td class="paramname">gain</td><td>Niveau de gain </td></tr>
     <tr><td class="paramname">listBuffer</td><td>La liste des buffer en mémoire </td></tr>
+    <tr><td class="paramname">choeur</td><td>Compteur du nombre d'échantillon traités </td></tr>
+    <tr><td class="paramname">retard</td><td>Le retard de l'effet (calculé dans la fonction) </td></tr>
+    <tr><td class="paramname">change</td><td>Indicateur du nombre d'échantillons à traiter avant de changer le retard </td></tr>
   </table>
   </dd>
 </dl>
@@ -283,7 +309,70 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
 
 </div>
 </div>
-<a class="anchor" id="a18517ad44351215d07eea5c790380b96"></a>
+<a class="anchor" id="a731dfba06c905935b44269f7a4bbfbed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void filter </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>na</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Effectue un filtrage linéaire selon une fonction de transfert rationelle. </p>
+<p><img class="formulaInl" alt="$ a[0]y[n] = b[0]x[n] + b[1]x[n-1] + ... + b[nb-1]x[n-(nb-1)] - a[1]x[n-1] - ... - a[na-1]x[n-(na-1)] $" src="form_0.png"/> </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Coefficient du numérateur </td></tr>
+    <tr><td class="paramname">a</td><td>Coefficient du dénominateur </td></tr>
+    <tr><td class="paramname">nb</td><td>Taille de b </td></tr>
+    <tr><td class="paramname">na</td><td>Taille de a </td></tr>
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1e8fefad8f9c1a3ac0429ce6bdfa5772"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -314,6 +403,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_time_delay</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>flange</em>&#160;</td>
         </tr>
@@ -332,6 +433,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
     <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
     <tr><td class="paramname">amp</td><td>Niveau d'amplification </td></tr>
     <tr><td class="paramname">listBuffer</td><td>La liste des buffer en mémoire </td></tr>
+    <tr><td class="paramname">max_time_delay</td><td>Le delay du retard en secondes compris entre 3ms et 15ms </td></tr>
+    <tr><td class="paramname">rate</td><td>Pourcentage de flange en Hz </td></tr>
     <tr><td class="paramname">flange</td><td>Pour éviter de revenir au début de la sinusoide à chaque nouveau buffer </td></tr>
   </table>
   </dd>
@@ -378,7 +481,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
 <p>Applique un effet fuzz au son. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">in</td><td><a class="el" href="structBuffer.html">Buffer</a> d'entree du son </td></tr>
+    <tr><td class="paramname">in</td><td><a class="el" href="structBuffer.html" title="Structure de données permettant de mémoriser les buffer afin de pouvoir les réutiliser. ">Buffer</a> d'entree du son </td></tr>
     <tr><td class="paramname">out</td><td>buffer de sortie du son </td></tr>
     <tr><td class="paramname">gain</td><td>Montant de distortion </td></tr>
     <tr><td class="paramname">mix</td><td>Mix du signal distordu et original </td></tr>
@@ -386,31 +489,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
   </dd>
 </dl>
 <dl class="section warning"><dt>Avertissement</dt><dd>mix doit être comprix entre 0 et 1 </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a7274a1d53b113acf107471994fdb5039"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float maxTabAbs </td>
-          <td>(</td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>tab</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Maximum d'un tableau en valeur absolu. </p>
-<dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tab</td><td>Un tableau de flottant </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Le maximum du tableau en valeur absolu </dd></dl>
 
 </div>
 </div>
@@ -450,6 +528,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
     <tr><td class="paramname">in</td><td>le buffer d'entrée </td></tr>
     <tr><td class="paramname">out</td><td>le buffer de sortie </td></tr>
     <tr><td class="paramname">drive</td><td>Nombre d'appel récursif </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a04331f5e0a564fb1723cc3def0990de0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shelving </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EQ&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un filtre shelving au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">gain</td><td>Niveau de gain. Un gain positif provoque un boost des fréquences et un gain négatif provoque un cut. </td></tr>
+    <tr><td class="paramname">fc</td><td>La fréquence centrale </td></tr>
+    <tr><td class="paramname">type</td><td>Le type d'égalisation. (BASS, TREBLE ou ALL) </td></tr>
   </table>
   </dd>
 </dl>
@@ -506,6 +640,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>shelving</b> (float *
     <tr><td class="paramname">alpha</td><td>Mixage signal d'entrée et modulation. Il est compris entre 0 et 1 sachant que 0 eteint la modulation et 1 donne le maximum de la modulation </td></tr>
     <tr><td class="paramname">fc</td><td>La fréquence de modulation </td></tr>
     <tr><td class="paramname">trem</td><td>Pour appliquer le tremolo en continu et ne pas recommencer à 0 sur chaque échantillon </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a04cd0027e1c74860543a0a0375e85c9a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vibrato </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>modfreq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>vibre</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique un effet vibrato au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">modfreq</td><td>La fréquence de modulation en Hz </td></tr>
+    <tr><td class="paramname">width</td><td>La largeur du retard en ms. </td></tr>
+    <tr><td class="paramname">vibre</td><td>Compteur pour éviter de revenir au début de la sinusoide à chaque buffer </td></tr>
   </table>
   </dd>
 </dl>

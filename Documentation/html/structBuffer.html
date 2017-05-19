@@ -86,21 +86,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <div class="title">Référence de la structure Buffer</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Structure de données permettant de mémoriser les buffer afin de pouvoir les réutiliser.  
+ <a href="structBuffer.html#details">Plus de détails...</a></p>
+
+<p><code>#include &lt;<a class="el" href="prototypes_8h_source.html">prototypes.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Champs de données</h2></td></tr>
-<tr class="memitem:a103c2c1915233ee3cef2568fcd955350"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a103c2c1915233ee3cef2568fcd955350"></a>
+<tr class="memitem:ae73ea083f949aa524632e4d6561ad35c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae73ea083f949aa524632e4d6561ad35c"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> [TMAX][2 *FRAME_PER_BUFFER]</td></tr>
-<tr class="separator:a103c2c1915233ee3cef2568fcd955350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63cd490315219923d992ab74d6d3e582"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63cd490315219923d992ab74d6d3e582"></a>
+<tr class="separator:ae73ea083f949aa524632e4d6561ad35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a602dbfdc9aa40beec34f827f0a96a18a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a602dbfdc9aa40beec34f827f0a96a18a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>premier</b></td></tr>
-<tr class="separator:a63cd490315219923d992ab74d6d3e582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64286cbea99392b211cc640b3ff916b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64286cbea99392b211cc640b3ff916b2"></a>
+<tr class="separator:a602dbfdc9aa40beec34f827f0a96a18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837b38f7ae7ac04da3a2cbe9a335aa03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a837b38f7ae7ac04da3a2cbe9a335aa03"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dernier</b></td></tr>
-<tr class="separator:a64286cbea99392b211cc640b3ff916b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a837b38f7ae7ac04da3a2cbe9a335aa03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Structure de données permettant de mémoriser les buffer afin de pouvoir les réutiliser. </p>
+<p>On mémorise TMAX buffer. Chaque buffer est enfilé à la suite. On accède à l'indice du premier avec premier et à l'indice du dernier avec dernier. </p>
+</div><h2 class="groupheader">Documentation des champs</h2>
+<a class="anchor" id="ae73ea083f949aa524632e4d6561ad35c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Buffer::buffer[TMAX][2 *FRAME_PER_BUFFER]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a837b38f7ae7ac04da3a2cbe9a335aa03"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Buffer::dernier</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a602dbfdc9aa40beec34f827f0a96a18a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Buffer::premier</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>La documentation de cette structure a été générée à partir du fichier suivant :<ul>
-<li><a class="el" href="prototypes_8h_source.html">prototypes.h</a></li>
+<li>header/<a class="el" href="prototypes_8h_source.html">prototypes.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

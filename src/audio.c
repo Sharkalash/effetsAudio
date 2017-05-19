@@ -10,19 +10,21 @@
 #include "../header/prototypes.h"
 #include "../header/audio.h"
 
-
-float maxTabAbs(float *tab)
+void normalise(float *tab)
 {
-  float max=fabs(tab[0]);
-  unsigned int i;
+  int i;
+  float max = 0;
 
-  for(i=1;i<2*FRAME_PER_BUFFER;i++)
+  for(i=0;i<2*FRAME_PER_BUFFER;i++){
+    if(fabs(tab[i])>max)
+      max = fabs(tab[i]);
+  }
+  
+  if(max>1) //On normalise si c'est supérieur à 1 pour éviter d'avoir des bruits sourds.
     {
-      if(max>fabs(tab[i]))
-	max = fabs(tab[i]);
+      for(i=0;i<2*FRAME_PER_BUFFER;i++)
+	tab[i]/=max;
     }
-
-  return max;
 }
 
 void copie(float *src, float* dest)
@@ -37,7 +39,7 @@ void fuzz(float* in,float *out, float gain, float mix)
 {
   float *q = malloc(sizeof(float)*2*FRAME_PER_BUFFER);
   float *z = malloc(sizeof(float)*2*FRAME_PER_BUFFER);
-  //float maxIN = maxTabAbs(in); Normalisation ne marche pas
+
   unsigned int i;
   
   copie(in,q);
@@ -53,6 +55,8 @@ void fuzz(float* in,float *out, float gain, float mix)
 
   free(q);
   free(z);
+
+  normalise(out);
 
 }
 
@@ -132,6 +136,8 @@ void wahwah(float *in, float *out,int fw, float *wah, int * monte)
       outL[i] = f1*out[2*i] + outL[i-1];
       f1 = 2*sin((PI*fc[i])/SAMPLE_RATE);
     }
+
+  normalise(out);
 }
 
 
@@ -153,8 +159,8 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
   int delayLine = (int)2*retard*SAMPLE_RATE/1000;
   int i;
 
-  if(delayLine>TMAX*2*FRAME_PER_BUFFER)
-    delayLine = TMAX*2*FRAME_PER_BUFFER;
+  if(delayLine>TAILLE_BUFFER)
+    delayLine = TAILLE_BUFFER;
 
     
   for(i=0;i<2*FRAME_PER_BUFFER;i++){
@@ -164,8 +170,10 @@ void echo(float *in, float *out, float gain, float retard, Buffer *listBuffer){
     }
     else{
       r=-r;
+      //Recherche dans les buffers précédents.
       int numBuffer = listBuffer->dernier - (int)(r/(2*FRAME_PER_BUFFER));
-      if(numBuffer<0)
+      
+      if(numBuffer<0) //Pour éviter d'avoir un indice négatif
 	numBuffer += TMAX-1;
  
       int ind = r%(2*FRAME_PER_BUFFER);
@@ -189,7 +197,6 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer,float max_time_
     if(r>=0){
       out[2*i] = amp*(in[2*i] + in[2*r]);
       out[2*i+1] = amp*(in[2*i+1] + in[2*r+1]);
-      //out[2*i + 1] = out[2*i];
     }
     else{
       r=-r;
@@ -199,9 +206,10 @@ void flanger(float *in, float* out,float amp, Buffer *listBuffer,float max_time_
 	numBuffer += TMAX-1;
  
       int ind = r%(FRAME_PER_BUFFER);
+
+      //Séparation droite/gauche
       out[2*i] = amp*(in[2*i] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -2]);
       out[2*i+1] = amp*(in[2*i+1] + listBuffer->buffer[numBuffer][2*FRAME_PER_BUFFER - 2*ind -1]);
-      //out[2*i+1] = out[2*i];
       
     }
   }
@@ -222,9 +230,9 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur,
     {
       if ((*choeur) % (SAMPLE_RATE / change) == 0)
 	{
-	  *retard = (rand() % (MAX - MIN + 1)) + MIN;
+	  *retard = (rand() % (MAX - MIN + 1)) + MIN; //Calcul du retard
 	  (*choeur) = 0;
-	  delayLine = (int) (*retard * SAMPLE_RATE / 1000);
+	  delayLine = (int) (*retard * SAMPLE_RATE / 1000); //Transformation en échantillon
 	}
 
       (*choeur)++;
@@ -238,6 +246,7 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur,
 	}
       else
 	{
+	  //Recherche dans les buffers précédent
 	  r = -r;
 	  int numBuffer = listBuffer->dernier - (int) (r / (FRAME_PER_BUFFER));
 	  if (numBuffer < 0)
@@ -257,7 +266,7 @@ void chorus (float *in, float *out, float gain, Buffer *listBuffer, int *choeur,
 void filter(float *b, float *a,int nb, int na,float *in, float *out)
 {
   int i,j;
-
+  
   if(a[0] == 0)
     {
       fprintf(stderr,"Erreur : division par zéro");
@@ -295,10 +304,11 @@ void filter(float *b, float *a,int nb, int na,float *in, float *out)
 	  j++;
 	}
 
-      out[2*i + 1] = out[2*i] = y;
+      out[2*i +1] = out[2*i] = y;
     }
       
 }
+
 
 void shelving(float *in, float *out, float gain, float fc, EQ type)
 {
@@ -315,13 +325,13 @@ void shelving(float *in, float *out, float gain, float fc, EQ type)
 
   if(gain > 0 &&  type == BASS)
     {
-      float div = (1 + r*k + powf(k,2));
+      float div = (1 + r*k + k*k);
       
-      b[0] = (1 + sqrt(v0)*r*k + v0*powf(k,2)) / div;
-      b[1] = (2*(v0*powf(k,2) - 1)) / div;
-      b[2] = (1 - sqrt(v0)*r*k + v0*powf(k,2)) / div;
-      a[1] = (2*(powf(k,2) - 1)) / div;
-      a[2] = (1 - r*k + powf(k,2)) / div;
+      b[0] = (1 + sqrt(v0)*r*k + v0*k*k) / div;
+      b[1] = (2*(v0*k*k - 1)) / div;
+      b[2] = (1 - sqrt(v0)*r*k + v0*k*k) / div;
+      a[1] = (2*(k*k - 1)) / div;
+      a[2] = (1 - r*k + k*k) / div;
     }
   
   /* BASS CUT */
@@ -377,7 +387,7 @@ void shelving(float *in, float *out, float gain, float fc, EQ type)
   a[0] = 1;
 
   filter(b,a,3,3,in,out);
-
+  
   }
       
 void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
@@ -388,20 +398,13 @@ void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
   float *delayLine;
   int i,j;
 
-  //width = round(width*SAMPLE_RATE); //Largeur de la modulation en echantillons
-  
-  if(width > delay)
-    {
-      fprintf(stderr, "Erreur : delai supérieur au délai maximum");
-      return;
-      }
 
   modfreq /= (float)SAMPLE_RATE; //Frequence de modulation en échantillons
 
   int l = 2+delay+ width*2; //Taille du délai
   delayLine = malloc(sizeof(float)*l);
 
-  for (i = 0; i < FRAME_PER_BUFFER; i++) {
+  for (i = 0; i < 2*FRAME_PER_BUFFER; i++) {
     float zeiger = sin(2*PI*(*vibre)*modfreq)*width + delay + 1;
     (*vibre)++;
     int r = floor(zeiger);
@@ -412,11 +415,10 @@ void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
     for(j=l-2;j>=1;j--)
       delayLine[j] = delayLine[j-1];
 
-    delayLine[0] = in[2*i];
+    delayLine[0] = in[i];
 
-    out[2*i + 1] = out[2*i] = delayLine[r+1]*frac + delayLine[r]*(1-frac); //Interpolation linéaire
-
-    
+    out[i] = delayLine[r+1]*frac + delayLine[r]*(1-frac); //Interpolation linéaire
+    out[i] *= 16;
     
   }
 
@@ -424,4 +426,29 @@ void vibrato(float *in, float *out, float modfreq, float width, int *vibre)
   free(delayLine);
 
 }
+
+
+void reverb(float *in, float *out, int n, float gain_allpass_filter, float gain_signal)
+{
+  int i;
   
+  float *copy = malloc(sizeof(float)*2*FRAME_PER_BUFFER);
+
+  shelving(in, out, gain_allpass_filter, 300, ALL);
+
+  //Série de allpass 
+  for (i = 1 ; i < n; i++)
+    {
+      copie(out,copy); 
+      shelving(copy,out,gain_allpass_filter,300,ALL); //Allpass
+    }
+  
+  for(i=0;i<2*FRAME_PER_BUFFER;i++){
+    out[i] += gain_signal*in[i];
+  }
+
+  normalise(out);
+
+  free(copy);
+
+}

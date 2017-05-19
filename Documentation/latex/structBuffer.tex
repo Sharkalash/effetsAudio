@@ -1,19 +1,45 @@
 \hypertarget{structBuffer}{}\section{Référence de la structure Buffer}
 \label{structBuffer}\index{Buffer@{Buffer}}
+
+
+Structure de données permettant de mémoriser les buffer afin de pouvoir les réutiliser.  
+
+
+
+
+{\ttfamily \#include $<$prototypes.\+h$>$}
+
 \subsection*{Champs de données}
 \begin{DoxyCompactItemize}
 \item 
-float {\bfseries buffer} \mbox{[}T\+M\+AX\mbox{]}\mbox{[}2 $\ast$F\+R\+A\+M\+E\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER\mbox{]}\hypertarget{structBuffer_a103c2c1915233ee3cef2568fcd955350}{}\label{structBuffer_a103c2c1915233ee3cef2568fcd955350}
+float {\bfseries buffer} \mbox{[}T\+M\+AX\mbox{]}\mbox{[}2 $\ast$F\+R\+A\+M\+E\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER\mbox{]}\hypertarget{structBuffer_ae73ea083f949aa524632e4d6561ad35c}{}\label{structBuffer_ae73ea083f949aa524632e4d6561ad35c}
 
 \item 
-int {\bfseries premier}\hypertarget{structBuffer_a63cd490315219923d992ab74d6d3e582}{}\label{structBuffer_a63cd490315219923d992ab74d6d3e582}
+int {\bfseries premier}\hypertarget{structBuffer_a602dbfdc9aa40beec34f827f0a96a18a}{}\label{structBuffer_a602dbfdc9aa40beec34f827f0a96a18a}
 
 \item 
-int {\bfseries dernier}\hypertarget{structBuffer_a64286cbea99392b211cc640b3ff916b2}{}\label{structBuffer_a64286cbea99392b211cc640b3ff916b2}
+int {\bfseries dernier}\hypertarget{structBuffer_a837b38f7ae7ac04da3a2cbe9a335aa03}{}\label{structBuffer_a837b38f7ae7ac04da3a2cbe9a335aa03}
 
 \end{DoxyCompactItemize}
 
 
+\subsection{Description détaillée}
+Structure de données permettant de mémoriser les buffer afin de pouvoir les réutiliser. 
+
+On mémorise T\+M\+AX buffer. Chaque buffer est enfilé à la suite. On accède à l\textquotesingle{}indice du premier avec premier et à l\textquotesingle{}indice du dernier avec dernier. 
+
+\subsection{Documentation des champs}
+\index{Buffer@{Buffer}!buffer@{buffer}}
+\index{buffer@{buffer}!Buffer@{Buffer}}
+\subsubsection[{\texorpdfstring{buffer}{buffer}}]{\setlength{\rightskip}{0pt plus 5cm}float Buffer\+::buffer\mbox{[}T\+M\+AX\mbox{]}\mbox{[}2 $\ast$F\+R\+A\+M\+E\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER\mbox{]}}\hypertarget{structBuffer_ae73ea083f949aa524632e4d6561ad35c}{}\label{structBuffer_ae73ea083f949aa524632e4d6561ad35c}
+\index{Buffer@{Buffer}!dernier@{dernier}}
+\index{dernier@{dernier}!Buffer@{Buffer}}
+\subsubsection[{\texorpdfstring{dernier}{dernier}}]{\setlength{\rightskip}{0pt plus 5cm}int Buffer\+::dernier}\hypertarget{structBuffer_a837b38f7ae7ac04da3a2cbe9a335aa03}{}\label{structBuffer_a837b38f7ae7ac04da3a2cbe9a335aa03}
+\index{Buffer@{Buffer}!premier@{premier}}
+\index{premier@{premier}!Buffer@{Buffer}}
+\subsubsection[{\texorpdfstring{premier}{premier}}]{\setlength{\rightskip}{0pt plus 5cm}int Buffer\+::premier}\hypertarget{structBuffer_a602dbfdc9aa40beec34f827f0a96a18a}{}\label{structBuffer_a602dbfdc9aa40beec34f827f0a96a18a}
+
+
 La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
 \item 
-prototypes.\+h\end{DoxyCompactItemize}
+header/prototypes.\+h\end{DoxyCompactItemize}

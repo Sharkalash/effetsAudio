@@ -1,11 +1,11 @@
 CC = gcc
-DEBUG = yes
+DEBUG = no
 EXE = audioFX
 SRC = $(wildcard src/*.c)#Génération de la liste des fichiers sources
 OBJ = $(SRC:.c=.o)#Génération de la liste des fichiers objets
 LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread -lSDL -lSDL_ttf #Bibliothèques
 
-ifeq ($(DEBUG), yes) #Condtions
+ifeq ($(DEBUG), yes)
 $(info "Mode debug")
 CFLAGS = -g -W -O2
 else
@@ -19,27 +19,18 @@ $(EXE) : $(OBJ)
 	$(CC) -o $@ $^ $(LIBS)
 
 
-%.o:%.c git
-	$(CC) -c $< $(CFLAGS)
+$(OBJ):$(SRC)
+	$(CC) -o $@ -c $< $(CFLAGS)
 cleanTmp :
-	rm -f *~* #Fichier temporaire d'emacs
-	rm -f *#*
+	rm -f */*~* #Fichier temporaire d'emacs
+	rm -f */*#*
+	rm -f *#* *~*
+
 clean : cleanTmp
-	rm -f *.o
+	rm -f src/*.o
 
 depend:
 	makedepend $(SRC)
 doc:
 	doxygen
-push :
-	git push https://github.com/Sharkalash/effetsAudio
-# DO NOT DELETE
 
-audio.o: /usr/include/stdlib.h /usr/include/features.h
-audio.o: /usr/include/stdc-predef.h /usr/include/alloca.h
-audio.o: /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h
-audio.o: /usr/include/wchar.h /usr/include/math.h prototypes.h audio.h
-main.o: /usr/include/stdio.h /usr/include/features.h
-main.o: /usr/include/stdc-predef.h /usr/include/libio.h
-main.o: /usr/include/_G_config.h /usr/include/wchar.h /usr/include/stdlib.h
-main.o: /usr/include/alloca.h /usr/include/math.h prototypes.h audio.h

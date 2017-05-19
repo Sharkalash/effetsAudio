@@ -1,5 +1,5 @@
-<map id="main.c" name="main.c">
-<area shape="rect" id="node8" href="$prototypes_8h_source.html" title="prototypes.h" alt="" coords="622,80,717,107"/>
-<area shape="rect" id="node9" href="$audio_8h_source.html" title="audio.h" alt="" coords="741,80,805,107"/>
-<area shape="rect" id="node10" href="$affichage_8h_source.html" title="affichage.h" alt="" coords="830,80,917,107"/>
+<map id="src/main.c" name="src/main.c">
+<area shape="rect" id="node9" href="$prototypes_8h_source.html" title="../header/prototypes.h" alt="" coords="707,80,856,107"/>
+<area shape="rect" id="node10" href="$audio_8h_source.html" title="../header/audio.h" alt="" coords="879,80,998,107"/>
+<area shape="rect" id="node11" href="$affichage_8h_source.html" title="../header/affichage.h" alt="" coords="1021,80,1163,107"/>
 </map>

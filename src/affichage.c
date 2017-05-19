@@ -1,24 +1,29 @@
+/**
+ *\file affichage.c
+ *\brief Fichier gérant la partie affichage et intéraction
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <string.h>
 #include "../header/prototypes.h"
-#include "..//header/affichage.h"
+#include "../header/affichage.h"
 
 
 void creerPedale(Pedale *p, char *nom, int x, int y){
   TTF_Font *police = NULL;
   SDL_Color rouge = {255,0,0};
   
-  police = TTF_OpenFont("Lato-Heavy.ttf", 12);
+  police = TTF_OpenFont("font/Lato-Heavy.ttf", 12); //Ouvertuve de la police
 
   strcpy(p->nom, nom);
 
   p->position.x = x;
   p->position.y = y;
 
-  p->texte = TTF_RenderText_Blended(police,nom,rouge);
+  p->texte = TTF_RenderText_Blended(police,nom,rouge); //Créatinon d'une surface pour afficher le texte à l'écran
 
   TTF_CloseFont(police);
 }
@@ -38,7 +43,7 @@ void set_color(Pedale *p, ETAT etat)
   TTF_Font *police = NULL;
   SDL_Color rouge = {255,0,0}, vert = {0,255,0};
   
-  police = TTF_OpenFont("Lato-Heavy.ttf",12);
+  police = TTF_OpenFont("font/Lato-Heavy.ttf",12);
 
   //ON : VERT, OFF : ROUGE
   if(etat == OFF)
@@ -80,7 +85,7 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
   int e;
   SDL_Event event;
 
-  police = TTF_OpenFont("Lato-Heavy.ttf",12);
+  police = TTF_OpenFont("font/Lato-Heavy.ttf",12);
   pedalier[pedale].texte = TTF_RenderText_Blended(police,pedalier[pedale].nom,blanc);
 
   TTF_CloseFont(police);
@@ -97,7 +102,7 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
       switch(event.type)
 	{
 	case SDL_QUIT:
-	  return 0;
+	  return 0; //On quitte le programme
 	  break;
 	case SDL_MOUSEBUTTONDOWN:
 	  continuer = 0;
@@ -113,7 +118,7 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 	    case SDLK_LEFT:
 	    case SDLK_UP:
 	    case SDLK_DOWN:
-	    case SDLK_a:
+	    case SDLK_a: 
 	    case SDLK_b:
 	    case SDLK_t:
 	      e = event.key.keysym.sym;
@@ -137,7 +142,8 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		case SHELVING:
 		  data->shelving_gain += (float) ((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
 		  data->shelving_fc += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->shelving_fc>0))*50;
-
+		  
+		  /*Type d'égalisation*/
 		  switch(e)
 		    {
 		    case SDLK_t:
@@ -174,8 +180,8 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
     }
 
   SDL_EnableKeyRepeat(0,0); //Désactivation de la répétition des touches
-  set_color(pedalier+pedale, data->effets[pedale]);
-  return 1;
+  set_color(pedalier+pedale, data->effets[pedale]); //Mis à jour de la couleur
+  return 1; //On continue l'execution
 }
 
 void pedalier(SDL_Surface *ecran,Data *data)
@@ -184,6 +190,16 @@ void pedalier(SDL_Surface *ecran,Data *data)
   SDL_Event event;
   Pedale pedalier[NB_EFFETS];
   int i,pedale,x = X_INIT, y = Y_INIT;
+  SDL_Surface *title = NULL;
+  SDL_Rect posTitre;
+  TTF_Font *police = NULL;
+  SDL_Color rouge = {255,0,0};
+  
+  police = TTF_OpenFont("font/Lato-Heavy.ttf",40);
+  title = TTF_RenderText_Blended(police,"PEDALIER",rouge);
+  TTF_CloseFont(police);
+  posTitre.x = LARGEUR/3;
+  posTitre.y = 50;
 
   /*Création des pédales */
   
@@ -224,7 +240,10 @@ void pedalier(SDL_Surface *ecran,Data *data)
   y=Y_INIT;
   
   creerPedale(pedalier+ECHO,"ECHO",x,y);
-  //creerPedale(pedalier+7,"REVERB",x,y);
+
+  y+=Y_INTERVALLE;
+  
+  creerPedale(pedalier+REVERB,"REVERB",x,y);
   
   while(continuer)
     {
@@ -237,16 +256,16 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	  continuer = 0;
 	  break;
 	case SDL_MOUSEBUTTONDOWN:
-	  pedale = get_pedale(event.button.x, event.button.y, pedalier);
+	  pedale = get_pedale(event.button.x, event.button.y, pedalier); //Récupération de la pédale
 
 	  if(event.button.button == SDL_BUTTON_RIGHT && pedale != -1)
 	    {
-	      continuer = selectionParametre(ecran,pedalier,pedale,data);
+	      continuer = selectionParametre(ecran,pedalier,pedale,data); //L'utilisateur ajuste les paramètres
 	      pedale = -1;
 	    }
 	  
 	  break;
-	case SDL_KEYDOWN: //Sélection clavier
+	case SDL_KEYDOWN: //Raccourcis clavier
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_q:
@@ -280,6 +299,9 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	    case SDLK_e:
 	      pedale = ECHO;
 	      break;
+	    case SDLK_r:
+	      pedale = REVERB;
+	      break;
 	    }
 	}
 
@@ -290,6 +312,7 @@ void pedalier(SDL_Surface *ecran,Data *data)
 	}
 
       SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,0,0,0)); //Fond de la fenetre
+      SDL_BlitSurface(title, NULL, ecran, &posTitre);
       
       //Collage de chaque pédale à l'écran
       for (i = 0; i < NB_EFFETS; i++) {
@@ -299,6 +322,7 @@ void pedalier(SDL_Surface *ecran,Data *data)
       SDL_Flip(ecran); //Actualisation de l'écran
     }
 
+  free(title);
   libererPedale(pedalier); //On libère toutes les pédales
 }
       

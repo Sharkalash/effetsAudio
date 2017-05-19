@@ -1,4 +1,4 @@
-<map id="audio.c" name="audio.c">
-<area shape="rect" id="node5" href="$prototypes_8h_source.html" title="prototypes.h" alt="" coords="266,80,361,107"/>
-<area shape="rect" id="node6" href="$audio_8h_source.html" title="audio.h" alt="" coords="385,80,449,107"/>
+<map id="src/audio.c" name="src/audio.c">
+<area shape="rect" id="node6" href="$prototypes_8h_source.html" title="../header/prototypes.h" alt="" coords="349,80,499,107"/>
+<area shape="rect" id="node7" href="$audio_8h_source.html" title="../header/audio.h" alt="" coords="522,80,641,107"/>
 </map>

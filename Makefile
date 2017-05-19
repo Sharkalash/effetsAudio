@@ -1,11 +1,11 @@
 CC = gcc
-DEBUG = yes
+DEBUG = no
 EXE = audioFX
 SRC = $(wildcard src/*.c)#Génération de la liste des fichiers sources
 OBJ = $(SRC:.c=.o)#Génération de la liste des fichiers objets
 LIBS = libportaudio.a -lrt -lm -lasound -ljack -pthread -lSDL -lSDL_ttf #Bibliothèques
 
-ifeq ($(DEBUG), yes) #Condtions
+ifeq ($(DEBUG), yes)
 $(info "Mode debug")
 CFLAGS = -g -W -O2
 else
@@ -19,8 +19,8 @@ $(EXE) : $(OBJ)
 	$(CC) -o $@ $^ $(LIBS)
 
 
-%.o:%.c git
-	$(CC) -c $< $(CFLAGS)
+%.o:%.c
+	$(CC) -o $@ -c $< $(CFLAGS)
 cleanTmp :
 	rm -f */*~* #Fichier temporaire d'emacs
 	rm -f */*#*
@@ -33,15 +33,15 @@ depend:
 	makedepend $(SRC)
 doc:
 	doxygen
-push :
-	git push https://github.com/Sharkalash/effetsAudio
+
 # DO NOT DELETE
 
 src/audio.o: /usr/include/stdlib.h /usr/include/features.h
 src/audio.o: /usr/include/stdc-predef.h /usr/include/alloca.h
 src/audio.o: /usr/include/stdio.h /usr/include/libio.h
 src/audio.o: /usr/include/_G_config.h /usr/include/wchar.h
-src/audio.o: /usr/include/math.h header/prototypes.h header/audio.h
+src/audio.o: /usr/include/math.h /usr/include/time.h /usr/include/xlocale.h
+src/audio.o: header/prototypes.h header/audio.h
 src/main.o: /usr/include/stdio.h /usr/include/features.h
 src/main.o: /usr/include/stdc-predef.h /usr/include/libio.h
 src/main.o: /usr/include/_G_config.h /usr/include/wchar.h
@@ -62,9 +62,9 @@ src/main.o: /usr/include/SDL/SDL_keyboard.h /usr/include/SDL/SDL_keysym.h
 src/main.o: /usr/include/SDL/SDL_mouse.h /usr/include/SDL/SDL_video.h
 src/main.o: /usr/include/SDL/SDL_joystick.h /usr/include/SDL/SDL_quit.h
 src/main.o: /usr/include/SDL/SDL_loadso.h /usr/include/SDL/SDL_timer.h
-src/main.o: /usr/include/SDL/SDL_version.h /usr/include/SDL/SDL_ttf.h
-src/main.o: /usr/include/SDL/SDL.h header/prototypes.h header/audio.h
-src/main.o: header/affichage.h
+src/main.o: /usr/include/SDL/SDL_version.h /usr/include/time.h
+src/main.o: /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h
+src/main.o: header/prototypes.h header/audio.h header/affichage.h
 src/affichage.o: /usr/include/stdio.h /usr/include/features.h
 src/affichage.o: /usr/include/stdc-predef.h /usr/include/libio.h
 src/affichage.o: /usr/include/_G_config.h /usr/include/wchar.h
@@ -88,4 +88,4 @@ src/affichage.o: /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_joystick.h
 src/affichage.o: /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h
 src/affichage.o: /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h
 src/affichage.o: /usr/include/SDL/SDL_ttf.h /usr/include/SDL/SDL.h
-src/affichage.o: header/prototypes.h
+src/affichage.o: header/prototypes.h header/affichage.h

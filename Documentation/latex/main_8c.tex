@@ -1,5 +1,5 @@
-\hypertarget{main_8c}{}\section{Référence du fichier main.\+c}
-\label{main_8c}\index{main.\+c@{main.\+c}}
+\hypertarget{main_8c}{}\section{Référence du fichier src/main.c}
+\label{main_8c}\index{src/main.\+c@{src/main.\+c}}
 
 
 Projet effet audio -\/ Fichier principal.  
@@ -10,12 +10,12 @@ Projet effet audio -\/ Fichier principal.
 {\ttfamily \#include $<$portaudio.\+h$>$}\\*
 {\ttfamily \#include $<$math.\+h$>$}\\*
 {\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
 {\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}prototypes.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}audio.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}affichage.\+h\char`\"{}}\\*
-Graphe des dépendances par inclusion de main.\+c\+:
-\nopagebreak
+{\ttfamily \#include \char`\"{}../header/prototypes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../header/audio.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de main.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -25,18 +25,14 @@ Graphe des dépendances par inclusion de main.\+c\+:
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structBuffer}{Buffer} $\ast$ {\bfseries creer\+Buffer} ()\hypertarget{main_8c_aeac6a57809803dc95d2c2a55bde0611f}{}\label{main_8c_aeac6a57809803dc95d2c2a55bde0611f}
-
-\item 
-void {\bfseries push} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer, float $\ast$in)\hypertarget{main_8c_a30349e8abf179e11939304443da230fe}{}\label{main_8c_a30349e8abf179e11939304443da230fe}
-
-\item 
-void {\bfseries liberer\+Buffer} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer)\hypertarget{main_8c_a6934d2030dc10fb92693b66ad5f4891f}{}\label{main_8c_a6934d2030dc10fb92693b66ad5f4891f}
-
-\item 
-\hyperlink{structData}{Data} {\bfseries init\+Data} ()\hypertarget{main_8c_a55559823eed9a8f3c87934a44b1d766d}{}\label{main_8c_a55559823eed9a8f3c87934a44b1d766d}
-
-\item 
+\hyperlink{structBuffer}{Buffer} $\ast$ \hyperlink{main_8c_aeac6a57809803dc95d2c2a55bde0611f}{creer\+Buffer} ()
+\begin{DoxyCompactList}\small\item\em Creer et initialise une file de buffer afin de les mémoriser. \end{DoxyCompactList}\item 
+void \hyperlink{main_8c_a30349e8abf179e11939304443da230fe}{push} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer, float $\ast$in)
+\begin{DoxyCompactList}\small\item\em Enfile un buffer. \end{DoxyCompactList}\item 
+void \hyperlink{main_8c_a6934d2030dc10fb92693b66ad5f4891f}{liberer\+Buffer} (\hyperlink{structBuffer}{Buffer} $\ast$list\+Buffer)
+\begin{DoxyCompactList}\small\item\em Libère la file des buffer. \end{DoxyCompactList}\item 
+\hyperlink{structData}{Data} \hyperlink{main_8c_a55559823eed9a8f3c87934a44b1d766d}{init\+Data} ()
+\begin{DoxyCompactList}\small\item\em Initialise toutes les données des effets. \end{DoxyCompactList}\item 
 int {\bfseries main} ()\hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
 
 \end{DoxyCompactItemize}
@@ -50,3 +46,69 @@ David B\+A\+L\+D\+A\+S\+S\+IN
 
 Sylvain B\+O\+U\+R\+G\+EA 
 \end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\index{main.\+c@{main.\+c}!creer\+Buffer@{creer\+Buffer}}
+\index{creer\+Buffer@{creer\+Buffer}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{creer\+Buffer()}{creerBuffer()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Buffer}$\ast$ creer\+Buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_aeac6a57809803dc95d2c2a55bde0611f}{}\label{main_8c_aeac6a57809803dc95d2c2a55bde0611f}
+
+
+Creer et initialise une file de buffer afin de les mémoriser. 
+
+\begin{DoxyReturn}{Renvoie}
+La file de buffer. 
+\end{DoxyReturn}
+\index{main.\+c@{main.\+c}!init\+Data@{init\+Data}}
+\index{init\+Data@{init\+Data}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{init\+Data()}{initData()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Data} init\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_a55559823eed9a8f3c87934a44b1d766d}{}\label{main_8c_a55559823eed9a8f3c87934a44b1d766d}
+
+
+Initialise toutes les données des effets. 
+
+\begin{DoxyReturn}{Renvoie}
+La structure avec toutes les données initialisées 
+\end{DoxyReturn}
+\index{main.\+c@{main.\+c}!liberer\+Buffer@{liberer\+Buffer}}
+\index{liberer\+Buffer@{liberer\+Buffer}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{liberer\+Buffer(\+Buffer $\ast$list\+Buffer)}{libererBuffer(Buffer *listBuffer)}}]{\setlength{\rightskip}{0pt plus 5cm}void liberer\+Buffer (
+\begin{DoxyParamCaption}
+\item[{{\bf Buffer} $\ast$}]{list\+Buffer}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_a6934d2030dc10fb92693b66ad5f4891f}{}\label{main_8c_a6934d2030dc10fb92693b66ad5f4891f}
+
+
+Libère la file des buffer. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em list\+Buffer} & La file des buffer \\
+\hline
+\end{DoxyParams}
+\index{main.\+c@{main.\+c}!push@{push}}
+\index{push@{push}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{push(\+Buffer $\ast$list\+Buffer, float $\ast$in)}{push(Buffer *listBuffer, float *in)}}]{\setlength{\rightskip}{0pt plus 5cm}void push (
+\begin{DoxyParamCaption}
+\item[{{\bf Buffer} $\ast$}]{list\+Buffer, }
+\item[{float $\ast$}]{in}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_a30349e8abf179e11939304443da230fe}{}\label{main_8c_a30349e8abf179e11939304443da230fe}
+
+
+Enfile un buffer. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em list\+Buffer} & La file des buffers \\
+\hline
+{\em in} & Le buffer à ajouter \\
+\hline
+\end{DoxyParams}
