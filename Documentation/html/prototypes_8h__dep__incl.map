@@ -1,0 +1,5 @@
+<map id="header/prototypes.h" name="header/prototypes.h">
+<area shape="rect" id="node2" href="$affichage_8c.html" title="Fichier gérant la partie affichage et intéraction. " alt="" coords="5,80,113,107"/>
+<area shape="rect" id="node3" href="$audio_8c.html" title="Fichier gérant l&#39;implémentation des effets. " alt="" coords="137,80,224,107"/>
+<area shape="rect" id="node4" href="$main_8c.html" title="Projet effet audio &#45; Fichier principal. " alt="" coords="249,80,331,107"/>
+</map>

@@ -21,6 +21,9 @@ Graphe des dépendances par inclusion de audio.\+c\+:\nopagebreak
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
+void {\bfseries normalise} (float $\ast$tab)\hypertarget{audio_8c_a9d3c1a9917e5bf818ca84b6101075fb4}{}\label{audio_8c_a9d3c1a9917e5bf818ca84b6101075fb4}
+
+\item 
 void \hyperlink{audio_8c_a3e7867b1e230dc6f63c5d6572379fee2}{copie} (float $\ast$src, float $\ast$dest)
 \begin{DoxyCompactList}\small\item\em Copie un tableau dans un autre. \end{DoxyCompactList}\item 
 void \hyperlink{audio_8c_abc8a4cb48273e1a25a5036c688e10cc1}{fuzz} (float $\ast$in, float $\ast$out, float gain, float mix)
@@ -42,7 +45,9 @@ void \hyperlink{audio_8c_a731dfba06c905935b44269f7a4bbfbed}{filter} (float $\ast
 void \hyperlink{audio_8c_a04331f5e0a564fb1723cc3def0990de0}{shelving} (float $\ast$in, float $\ast$out, float gain, float fc, EQ type)
 \begin{DoxyCompactList}\small\item\em Applique un filtre shelving au signal. \end{DoxyCompactList}\item 
 void \hyperlink{audio_8c_a04cd0027e1c74860543a0a0375e85c9a}{vibrato} (float $\ast$in, float $\ast$out, float modfreq, float width, int $\ast$vibre)
-\begin{DoxyCompactList}\small\item\em Applique un effet vibrato au signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Applique un effet vibrato au signal. \end{DoxyCompactList}\item 
+void \hyperlink{audio_8c_a65985c1349ab2a0f72b2292eca142004}{reverb} (float $\ast$in, float $\ast$out, int n, float gain\+\_\+allpass\+\_\+filter, float gain\+\_\+signal)
+\begin{DoxyCompactList}\small\item\em Applique l\textquotesingle{}effet reverb au signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -245,6 +250,32 @@ On appelle la fonction récursivement pour augmenter l\textquotesingle{}effet
 {\em out} & le buffer de sortie \\
 \hline
 {\em drive} & Nombre d\textquotesingle{}appel récursif \\
+\hline
+\end{DoxyParams}
+\index{audio.\+c@{audio.\+c}!reverb@{reverb}}
+\index{reverb@{reverb}!audio.\+c@{audio.\+c}}
+\subsubsection[{\texorpdfstring{reverb(float $\ast$in, float $\ast$out, int n, float gain\+\_\+allpass\+\_\+filter, float gain\+\_\+signal)}{reverb(float *in, float *out, int n, float gain_allpass_filter, float gain_signal)}}]{\setlength{\rightskip}{0pt plus 5cm}void reverb (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{in, }
+\item[{float $\ast$}]{out, }
+\item[{int}]{n, }
+\item[{float}]{gain\+\_\+allpass\+\_\+filter, }
+\item[{float}]{gain\+\_\+signal}
+\end{DoxyParamCaption}
+)}\hypertarget{audio_8c_a65985c1349ab2a0f72b2292eca142004}{}\label{audio_8c_a65985c1349ab2a0f72b2292eca142004}
+
+
+Applique l\textquotesingle{}effet reverb au signal. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Le buffer d\textquotesingle{}entrée \\
+\hline
+{\em out} & Le buffer de sortie \\
+\hline
+{\em gain\+\_\+allpass\+\_\+filter} & Le gain du allpass \\
+\hline
+{\em gain\+\_\+signal} & Le gain du signal d\textquotesingle{}entrée \\
 \hline
 \end{DoxyParams}
 \index{audio.\+c@{audio.\+c}!shelving@{shelving}}

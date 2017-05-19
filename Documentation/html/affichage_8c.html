@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Documentation effet audio: Référence du fichier src/affichage.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Documentation effet audio
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier affichage.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier gérant la partie affichage et intéraction.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;SDL/SDL.h&gt;</code><br />
+<code>#include &lt;SDL/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;../header/prototypes.h&quot;</code><br />
+<code>#include &quot;../header/affichage.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de affichage.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="affichage_8c__incl.png" border="0" usemap="#src_2affichage_8c" alt=""/></div>
+<map name="src_2affichage_8c" id="src_2affichage_8c">
+<area shape="rect" id="node7" href="prototypes_8h_source.html" title="../header/prototypes.h" alt="" coords="513,80,663,107"/>
+<area shape="rect" id="node8" href="affichage_8h_source.html" title="../header/affichage.h" alt="" coords="687,80,828,107"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a2182439fb28a1f6dc869407b905c7a5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a2182439fb28a1f6dc869407b905c7a5b">creerPedale</a> (<a class="el" href="structPedale.html">Pedale</a> *p, char *nom, int x, int y)</td></tr>
+<tr class="memdesc:a2182439fb28a1f6dc869407b905c7a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une pédale.  <a href="#a2182439fb28a1f6dc869407b905c7a5b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2182439fb28a1f6dc869407b905c7a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3697892ed958cb36e957f7cda66d5a41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a3697892ed958cb36e957f7cda66d5a41">libererPedale</a> (<a class="el" href="structPedale.html">Pedale</a> p[])</td></tr>
+<tr class="memdesc:a3697892ed958cb36e957f7cda66d5a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère un tableau de pédale.  <a href="#a3697892ed958cb36e957f7cda66d5a41">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3697892ed958cb36e957f7cda66d5a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf852fc39e7db7d33b97a923d3e795bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#acf852fc39e7db7d33b97a923d3e795bc">set_color</a> (<a class="el" href="structPedale.html">Pedale</a> *p, ETAT etat)</td></tr>
+<tr class="memdesc:acf852fc39e7db7d33b97a923d3e795bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Donne une couleur à une pédale en fonction de son état. Vert si elle est allumée, rouge sinon.  <a href="#acf852fc39e7db7d33b97a923d3e795bc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acf852fc39e7db7d33b97a923d3e795bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa49f938eabb4a5342a514a24de076eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#aaa49f938eabb4a5342a514a24de076eb">get_pedale</a> (int x, int y, <a class="el" href="structPedale.html">Pedale</a> <a class="el" href="affichage_8c.html#a6f106aa5eba862b7c6caefbc00ab38de">pedalier</a>[])</td></tr>
+<tr class="memdesc:aaa49f938eabb4a5342a514a24de076eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de connaitre quelle pédale a été sélectionnée par clic de la souris.  <a href="#aaa49f938eabb4a5342a514a24de076eb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aaa49f938eabb4a5342a514a24de076eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99287bc2d1538299c48d012bf35ea17"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#ae99287bc2d1538299c48d012bf35ea17">selectionParametre</a> (SDL_Surface *ecran, <a class="el" href="structPedale.html">Pedale</a> <a class="el" href="affichage_8c.html#a6f106aa5eba862b7c6caefbc00ab38de">pedalier</a>[], FX pedale, <a class="el" href="structData.html">Data</a> *data)</td></tr>
+<tr class="memdesc:ae99287bc2d1538299c48d012bf35ea17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet à l'utilisateur d'ajuster les paramètres des effets.  <a href="#ae99287bc2d1538299c48d012bf35ea17">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae99287bc2d1538299c48d012bf35ea17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f106aa5eba862b7c6caefbc00ab38de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a6f106aa5eba862b7c6caefbc00ab38de">pedalier</a> (SDL_Surface *ecran, <a class="el" href="structData.html">Data</a> *data)</td></tr>
+<tr class="memdesc:a6f106aa5eba862b7c6caefbc00ab38de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implémentation de l'intéraction et de l'affichage des effets.  <a href="#a6f106aa5eba862b7c6caefbc00ab38de">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6f106aa5eba862b7c6caefbc00ab38de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier gérant la partie affichage et intéraction. </p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a2182439fb28a1f6dc869407b905c7a5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void creerPedale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPedale.html">Pedale</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de création d'une pédale. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Pointeur sur un pedale </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom de la pédale </td></tr>
+    <tr><td class="paramname">x</td><td>Position sur l'axe horizontal en px </td></tr>
+    <tr><td class="paramname">y</td><td>Position sur l'axe vertical en px </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aaa49f938eabb4a5342a514a24de076eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_pedale </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPedale.html">Pedale</a>&#160;</td>
+          <td class="paramname"><em>pedalier</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de connaitre quelle pédale a été sélectionnée par clic de la souris. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Position horizontale du curseur </td></tr>
+    <tr><td class="paramname">y</td><td>Position verticale du curseur </td></tr>
+    <tr><td class="paramname">pedalier</td><td>Tableau des pédales </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La pédale sélectionnée ou -1 si ce n'est pas une pédale </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3697892ed958cb36e957f7cda66d5a41"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libererPedale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPedale.html">Pedale</a>&#160;</td>
+          <td class="paramname"><em>p</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère un tableau de pédale. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Tableau de pédale </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6f106aa5eba862b7c6caefbc00ab38de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pedalier </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>ecran</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implémentation de l'intéraction et de l'affichage des effets. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ecran</td><td>Surface sur laquelle on affiche les pédales </td></tr>
+    <tr><td class="paramname">data</td><td>Données concernant les effets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae99287bc2d1538299c48d012bf35ea17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int selectionParametre </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Surface *&#160;</td>
+          <td class="paramname"><em>ecran</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structPedale.html">Pedale</a>&#160;</td>
+          <td class="paramname"><em>pedalier</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FX&#160;</td>
+          <td class="paramname"><em>pedale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structData.html">Data</a> *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet à l'utilisateur d'ajuster les paramètres des effets. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ecran</td><td>L'écran </td></tr>
+    <tr><td class="paramname">pedalier</td><td>Tableau des pédales </td></tr>
+    <tr><td class="paramname">pedale</td><td>La pédale sélectionnée </td></tr>
+    <tr><td class="paramname">data</td><td>Données concernant les effets </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Booléen. Vrai, on continue l'execution, sinon on quitte le programme </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acf852fc39e7db7d33b97a923d3e795bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_color </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPedale.html">Pedale</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ETAT&#160;</td>
+          <td class="paramname"><em>etat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Donne une couleur à une pédale en fonction de son état. Vert si elle est allumée, rouge sinon. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Pointeur sur la pédale </td></tr>
+    <tr><td class="paramname">etat</td><td>L'état actuel de la pédale </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

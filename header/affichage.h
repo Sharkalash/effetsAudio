@@ -8,7 +8,7 @@
 
 /**
  *\struc pedale
- *\brief Contient les inforamtions concernant un pédale : sa position et son nom
+ *\brief Contient les inforamtions concernant une pédale : sa position et son nom
  */
 
 typedef struct Pedale

@@ -111,6 +111,9 @@ Graphe des dépendances par inclusion de audio.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
+<tr class="memitem:a9d3c1a9917e5bf818ca84b6101075fb4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d3c1a9917e5bf818ca84b6101075fb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>normalise</b> (float *tab)</td></tr>
+<tr class="separator:a9d3c1a9917e5bf818ca84b6101075fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a3e7867b1e230dc6f63c5d6572379fee2">copie</a> (float *src, float *dest)</td></tr>
 <tr class="memdesc:a3e7867b1e230dc6f63c5d6572379fee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copie un tableau dans un autre.  <a href="#a3e7867b1e230dc6f63c5d6572379fee2">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3e7867b1e230dc6f63c5d6572379fee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +147,9 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a04cd0027e1c74860543a0a0375e85c9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a04cd0027e1c74860543a0a0375e85c9a">vibrato</a> (float *in, float *out, float modfreq, float width, int *vibre)</td></tr>
 <tr class="memdesc:a04cd0027e1c74860543a0a0375e85c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique un effet vibrato au signal.  <a href="#a04cd0027e1c74860543a0a0375e85c9a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a04cd0027e1c74860543a0a0375e85c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65985c1349ab2a0f72b2292eca142004"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#a65985c1349ab2a0f72b2292eca142004">reverb</a> (float *in, float *out, int n, float gain_allpass_filter, float gain_signal)</td></tr>
+<tr class="memdesc:a65985c1349ab2a0f72b2292eca142004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique l'effet reverb au signal.  <a href="#a65985c1349ab2a0f72b2292eca142004">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a65985c1349ab2a0f72b2292eca142004"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Fichier gérant l'implémentation des effets. </p>
@@ -528,6 +534,61 @@ Fonctions</h2></td></tr>
     <tr><td class="paramname">in</td><td>le buffer d'entrée </td></tr>
     <tr><td class="paramname">out</td><td>le buffer de sortie </td></tr>
     <tr><td class="paramname">drive</td><td>Nombre d'appel récursif </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a65985c1349ab2a0f72b2292eca142004"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reverb </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain_allpass_filter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>gain_signal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique l'effet reverb au signal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>Le buffer d'entrée </td></tr>
+    <tr><td class="paramname">out</td><td>Le buffer de sortie </td></tr>
+    <tr><td class="paramname">gain_allpass_filter</td><td>Le gain du allpass </td></tr>
+    <tr><td class="paramname">gain_signal</td><td>Le gain du signal d'entrée </td></tr>
   </table>
   </dd>
 </dl>
