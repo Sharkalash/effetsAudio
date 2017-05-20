@@ -23,7 +23,7 @@ void creerPedale(Pedale *p, char *nom, int x, int y){
   p->position.x = x;
   p->position.y = y;
 
-  p->texte = TTF_RenderText_Blended(police,nom,rouge); //Créatinon d'une surface pour afficher le texte à l'écran
+  p->texte = TTF_RenderText_Blended(police,nom,rouge); //Création d'une surface pour afficher le texte à l'écran
 
   TTF_CloseFont(police);
 }
@@ -171,6 +171,10 @@ int selectionParametre(SDL_Surface *ecran, Pedale pedalier[],FX pedale, Data *da
 		case ECHO:
 		  data->echo_retard += ((e==SDLK_RIGHT) - (e==SDLK_LEFT && data->echo_retard>50))*50;
 		  data->echo_gain += (float)((e==SDLK_UP) - (e==SDLK_DOWN))/10.;
+		  break;
+		case REVERB:
+		  data->reverb_gainAllpass += (float)((e==SDLK_UP) - (e==SDLK_DOWN && data->reverb_gainAllpass > 0))/10.;
+		  data->reverb_nbAllpass += (e==SDLK_RIGHT) - (e==SDLK_LEFT && data->reverb_nbAllpass > 1);
 		  break;
 		}
 	      
